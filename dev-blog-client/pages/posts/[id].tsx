@@ -2,8 +2,14 @@ import Layout from '../../components/layout'
 import { getAllPostIds, getPostData } from '../../lib/posts'
 import Head from 'next/head'
 import Date from '../../components/date'
-import utilStyles from '../../styles/utils.module.css'
 import { GetStaticProps, GetStaticPaths } from 'next'
+import ReactMarkdown from 'react-markdown'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import {
+  dark,
+  dracula,
+  prism,
+} from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 export default function Post({
   postData
@@ -11,7 +17,7 @@ export default function Post({
   postData: {
     title: string
     date: string
-    contentHtml: string
+    content: string
   }
 }) {
   return (
@@ -20,11 +26,31 @@ export default function Post({
         <title>{postData.title}</title>
       </Head>
       <article>
-        <h1 className={utilStyles.headingXl}>{postData.title}</h1>
-        <div className={utilStyles.lightText}>
+        <h1>{postData.title}</h1>
+        <div>
           <Date dateString={postData.date} />
         </div>
-        <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+        <ReactMarkdown
+          components={{
+            code({ node, inline, className, children, ...props }: any) {
+              const match = /language-(\w+)/.exec(className || '');
+              return !inline && match ? (
+                <SyntaxHighlighter
+                  style={dracula}
+                  language={match[1]}
+                  PreTag="div"
+                  {...props}
+                >
+                  {String(children).replace(/\n$/, '')}
+                </SyntaxHighlighter>
+              ) : (
+                <code>{children}</code>
+              );
+            },
+          }}
+        >
+          {postData.content}
+        </ReactMarkdown>
       </article>
     </Layout>
   )
@@ -39,10 +65,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const postData = await getPostData(params.id as string)
+  let postData = await getPostData(params.id as string)
   return {
     props: {
-      postData
+      postData,
     }
   }
 }
