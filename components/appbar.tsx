@@ -6,10 +6,13 @@ export default function AppBar() {
   const router: NextRouter = useRouter()
   const path: string = router.pathname
   const isCategoryHover = (): string => {
-    if (path === '/' || path.split('/')[1] === 'posts') {
+    console.log(path.split('/'))
+    if (path === '/' || path.split('/')[1].startsWith('[y')) {
       return 'post'
     } else if (path === '/about') {
       return 'detail'
+    } else {
+      return 'tags'
     }
   }
   return (
@@ -17,12 +20,15 @@ export default function AppBar() {
       <div className="flex justify-between items-center max-w-2xl mx-auto px-4 text-white">
         <div className="flex items-center">
           <Image
-            src="/images/profile.jpg"
+            src="/images/profile.jpeg"
             alt="profile image"
             height={32}
             width={32}
+            className="rounded-full shadow-lg bg-slate-500"
           />
-          <h2 className="ml-4 font-bold">dltmdrbtjd</h2>
+          <Link href="/">
+            <a className="ml-4 font-bold">dltmdrbtjd</a>
+          </Link>
         </div>
         <div>
           <Link href="/">
@@ -32,6 +38,15 @@ export default function AppBar() {
               }`}
             >
               Post
+            </a>
+          </Link>
+          <Link href="/tags">
+            <a
+              className={`ml-4 font-bold ${
+                isCategoryHover() === 'tags' ? 'text-emerald-200' : ''
+              }`}
+            >
+              Tags
             </a>
           </Link>
           <Link href="/about">
