@@ -27,9 +27,9 @@ export default function Layout({
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <main className="prose mx-auto mt-24 px-4">{children}</main>
+      <main className="prose max-w-2xl mx-auto mt-28 px-4">{children}</main>
       {!home && (
-        <div>
+        <div className="max-w-2xl mx-auto text-white font-bold hover:text-emerald-200 px-4 mb-10">
           <Link href="/">
             <a>← Back to home</a>
           </Link>
