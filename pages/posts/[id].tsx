@@ -4,15 +4,11 @@ import Head from 'next/head'
 import Date from '../../components/date'
 import { GetStaticProps, GetStaticPaths } from 'next'
 import ReactMarkdown from 'react-markdown'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import {
-  dark,
-  dracula,
-  prism,
-} from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
 export default function Post({
-  postData
+  postData,
 }: {
   postData: {
     title: string
@@ -33,7 +29,7 @@ export default function Post({
         <ReactMarkdown
           components={{
             code({ node, inline, className, children, ...props }: any) {
-              const match = /language-(\w+)/.exec(className || '');
+              const match = /language-(\w+)/.exec(className || '')
               return !inline && match ? (
                 <SyntaxHighlighter
                   style={dracula}
@@ -45,7 +41,7 @@ export default function Post({
                 </SyntaxHighlighter>
               ) : (
                 <code>{children}</code>
-              );
+              )
             },
           }}
         >
@@ -60,15 +56,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getAllPostIds()
   return {
     paths,
-    fallback: false
+    fallback: false,
   }
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  let postData = await getPostData(params.id as string)
+  const postData = await getPostData(params.id as string)
   return {
     props: {
       postData,
-    }
+    },
   }
 }
