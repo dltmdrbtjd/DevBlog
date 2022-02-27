@@ -11,6 +11,7 @@ export default function Home({
   allPostsData: {
     date: string
     title: string
+    subheading: string
     id: string
   }[]
 }) {
@@ -20,14 +21,14 @@ export default function Home({
         <title>{siteTitle}</title>
       </Head>
       <section>
-        <h2>Blog</h2>
+        <h1>Post</h1>
         <ul>
-          {allPostsData.map(({ id, date, title }) => (
+          {allPostsData.map(({ id, date, title, subheading }) => (
             <li key={id}>
               <Link href={`/posts/${id}`}>
-                <a>{title}</a>
+                <a className="text-cyan-100 no-underline text-xl">{title}</a>
               </Link>
-              <br />
+              <p className="my-0">{subheading}</p>
               <small>
                 <Date dateString={date} />
               </small>
