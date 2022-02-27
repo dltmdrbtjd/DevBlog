@@ -1,8 +1,6 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import Link from 'next/link'
 
-const name = 'Lee Seung Gyu'
 export const siteTitle = 'Next.js Sample Website'
 
 export default function Layout({
@@ -29,40 +27,7 @@ export default function Layout({
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <header className="text-center">
-        {home ? (
-          <>
-            <Image
-              priority
-              src="/images/profile.jpg"
-              height={144}
-              width={144}
-              alt={name}
-            />
-            <h1>{name}</h1>
-          </>
-        ) : (
-          <>
-            <Link href="/">
-              <a>
-                <Image
-                  priority
-                  src="/images/profile.jpg"
-                  height={108}
-                  width={108}
-                  alt={name}
-                />
-              </a>
-            </Link>
-            <h2>
-              <Link href="/">
-                <a>{name}</a>
-              </Link>
-            </h2>
-          </>
-        )}
-      </header>
-      <main className="prose mx-auto">{children}</main>
+      <main className="prose mx-auto mt-24 px-4">{children}</main>
       {!home && (
         <div>
           <Link href="/">
