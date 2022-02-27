@@ -42,7 +42,6 @@ export default function Home({
 
 export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = await getAllPosts()
-  console.log(allPostsData[0].path)
   return {
     props: {
       allPostsData,
