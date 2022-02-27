@@ -1,6 +1,7 @@
 ---
-title: "It just test title"
-date: "2022-02-27"
+title: 'It just test title'
+date: '2022-02-27'
+subheading: 'subheading testing'
 ---
 
 It just test text **I like it** nextjs
