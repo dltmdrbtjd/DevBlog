@@ -1,5 +1,5 @@
 import Layout from '../../components/layout'
-import { getAllPostIds, getPostData } from '../../lib/posts'
+import { getAllPosts } from '../../lib/posts'
 import Head from 'next/head'
 import Date from '../../components/date'
 import { GetStaticProps, GetStaticPaths } from 'next'
@@ -8,9 +8,9 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
 export default function Post({
-  postData,
+  post,
 }: {
-  postData: {
+  post: {
     title: string
     date: string
     content: string
@@ -19,12 +19,12 @@ export default function Post({
   return (
     <Layout>
       <Head>
-        <title>{postData.title}</title>
+        <title>{post.title}</title>
       </Head>
       <article>
-        <h1>{postData.title}</h1>
+        <h1>{post.title}</h1>
         <div>
-          <Date dateString={postData.date} />
+          <Date dateString={post.date} />
         </div>
         <ReactMarkdown
           components={{
@@ -45,7 +45,7 @@ export default function Post({
             },
           }}
         >
-          {postData.content}
+          {post.content}
         </ReactMarkdown>
       </article>
     </Layout>
@@ -53,18 +53,37 @@ export default function Post({
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = getAllPostIds()
+  const allPosts = await getAllPosts()
+  const paths: Array<{ params: { year: string; otherPaths: string[] } }> =
+    allPosts.reduce<Array<{ params: { year: string; otherPaths: string[] } }>>(
+      (prev, { path }) => {
+        const [year, ...otherPaths] = `${path.replace('.md', '')}`.split('/')
+        prev.push({ params: { year, otherPaths } })
+        return prev
+      },
+      [],
+    )
   return {
     paths,
-    fallback: false,
+    fallback: 'blocking',
   }
 }
 
+interface PathInterface {
+  [key: string]: string | string[] | undefined
+  year: string
+  otherPaths: string[]
+}
+
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const postData = await getPostData(params.id as string)
+  const { year, otherPaths } = params as PathInterface
+  const fullPath = [year, ...(otherPaths as string[])].join('/')
+  const posts = await getAllPosts()
+  const post = posts.find((p) => p?.path === fullPath)
+  console.log(post)
   return {
     props: {
-      postData,
+      post,
     },
   }
 }
