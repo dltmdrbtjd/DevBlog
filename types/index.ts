@@ -3,7 +3,7 @@ export interface Post {
   date: string
   subheading: string
   completed: boolean
-  tags: string[]
+  category: string[]
   path: string
   content: string
 }
