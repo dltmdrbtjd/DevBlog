@@ -6,13 +6,12 @@ export default function AppBar() {
   const router: NextRouter = useRouter()
   const path: string = router.pathname
   const isCategoryHover = (): string => {
-    console.log(path.split('/'))
-    if (path === '/' || path.split('/')[1].startsWith('[y')) {
+    if (path.includes('posts')) {
       return 'post'
-    } else if (path === '/about') {
-      return 'detail'
-    } else {
-      return 'tags'
+    } else if (path.includes('category')) {
+      return 'category'
+    } else if (path.includes('about')) {
+      return 'about'
     }
   }
   return (
@@ -31,7 +30,7 @@ export default function AppBar() {
           </Link>
         </div>
         <div>
-          <Link href="/">
+          <Link href="/posts/1">
             <a
               className={`font-bold ${
                 isCategoryHover() === 'post' ? 'text-emerald-200' : ''
@@ -40,19 +39,19 @@ export default function AppBar() {
               Post
             </a>
           </Link>
-          <Link href="/tags">
+          <Link href="/category">
             <a
               className={`ml-4 font-bold ${
-                isCategoryHover() === 'tags' ? 'text-emerald-200' : ''
+                isCategoryHover() === 'category' ? 'text-emerald-200' : ''
               }`}
             >
-              Tags
+              Category
             </a>
           </Link>
           <Link href="/about">
             <a
               className={`ml-4 font-bold ${
-                isCategoryHover() === 'detail' ? 'text-emerald-200' : ''
+                isCategoryHover() === 'about' ? 'text-emerald-200' : ''
               }`}
             >
               About Me
