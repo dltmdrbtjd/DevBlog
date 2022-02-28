@@ -3,7 +3,7 @@ title: 'Two Forms of Pre-rendering'
 date: '2020-01-01'
 subheading: 'subheading testing'
 completed: true
-tags:
+category:
   - testing2
   - test2
 ---
