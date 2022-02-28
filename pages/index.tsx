@@ -1,50 +1,28 @@
 import Head from 'next/head'
 import Layout, { siteTitle } from '../components/layout'
+import PostList from '../components/layouts/List'
 import { getAllPosts } from '../lib/posts'
-import Link from 'next/link'
-import Date from '../components/date'
+import { Post } from '../types'
 import { GetStaticProps } from 'next'
+import { DefaultNumberOfPosts } from '../constant'
 
-export default function Home({
-  allPostsData,
-}: {
-  allPostsData: {
-    date: string
-    title: string
-    subheading: string
-    path: string
-  }[]
-}) {
+export default function Home({ posts }: { posts: Array<Post> }) {
   return (
     <Layout home>
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <section>
-        <h1>Post</h1>
-        <ul>
-          {allPostsData.map(({ path, date, title, subheading }) => (
-            <li key={path}>
-              <Link href={`/${path}`} passHref>
-                <a className="text-cyan-100 no-underline text-xl">{title}</a>
-              </Link>
-              <p className="my-0">{subheading}</p>
-              <small>
-                <Date dateString={date} />
-              </small>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <PostList posts={posts} title={'Latest'} />
     </Layout>
   )
 }
 
 export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = await getAllPosts()
+  const posts = allPostsData.slice(0, DefaultNumberOfPosts)
   return {
     props: {
-      allPostsData,
+      posts,
     },
   }
 }
