@@ -42,3 +42,27 @@ async function getSortedPostsData(): Promise<Array<Post>> {
 
 export const getAllPosts: () => Promise<Array<Post>> =
   memoizee(getSortedPostsData)
+
+export async function getAllCategory(): Promise<
+  Array<{ category: string; count: number }>
+> {
+  const categories: string[] = (await getAllPosts()).reduce<string[]>(
+    (prev, cur) => {
+      cur.category.forEach((tag: string) => {
+        prev.push(tag)
+      })
+      return prev
+    },
+    [],
+  )
+  console.log(categories)
+
+  const categoryWithCount = [...new Set(categories)].map((tag) => ({
+    category: tag,
+    count: categories.filter((t) => t === tag).length,
+  }))
+
+  console.log(categoryWithCount)
+
+  return categoryWithCount.sort((a, b) => b.count - a.count)
+}
