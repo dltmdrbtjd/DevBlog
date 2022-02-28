@@ -28,7 +28,6 @@ async function getSortedPostsData(): Promise<Array<Post>> {
         }
         return [...prev, result]
       }
-      console.log(content)
       return prev
     }, [])
     .sort((a, b) => {
