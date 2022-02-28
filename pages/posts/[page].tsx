@@ -29,6 +29,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = [
     ...new Array(Math.round(posts.length / DefaultNumberOfPosts)).keys(),
   ].map((i) => ({ params: { page: `${i + 1}` } }))
+
   return {
     paths,
     fallback: 'blocking',
@@ -44,6 +45,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { page } = params as PageInterface
   const pageNum = parseInt(page)
   const allPosts = await getAllPosts()
+
+  if (isNaN(pageNum) || pageNum < 1) {
+    return {
+      notFound: true,
+    }
+  }
 
   const startIdx = (pageNum - 1) * DefaultNumberOfPosts
   const lastIdx = startIdx + DefaultNumberOfPosts
