@@ -55,14 +55,11 @@ export async function getAllCategory(): Promise<
     },
     [],
   )
-  console.log(categories)
 
   const categoryWithCount = [...new Set(categories)].map((tag) => ({
     category: tag,
     count: categories.filter((t) => t === tag).length,
   }))
-
-  console.log(categoryWithCount)
 
   return categoryWithCount.sort((a, b) => b.count - a.count)
 }
