@@ -6,7 +6,7 @@ export default function AppBar() {
   const router: NextRouter = useRouter()
   const path: string = router.pathname
   const isCategoryHover = (): string => {
-    if (path.includes('posts')) {
+    if (path.includes('posts') || path.includes('detail')) {
       return 'post'
     } else if (path.includes('category')) {
       return 'category'
