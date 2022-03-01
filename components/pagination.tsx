@@ -3,15 +3,19 @@ import Link from 'next/link'
 export default function Pagination({
   pageNum,
   isNextPage,
+  prevPath,
+  nextPath,
 }: {
   pageNum: number
   isNextPage: boolean
+  prevPath?: string
+  nextPath?: string
 }) {
   return (
     <div className="max-w-2xl mt-6 mb-8 flex justify-between itesm-center">
       <div className="flex w-1/2 justify-start">
         {pageNum > 1 && (
-          <Link href={`/posts/${pageNum - 1}`}>
+          <Link href={prevPath || `/posts/${pageNum - 1}`}>
             <a
               href="#"
               className="inline-flex justify-start no-underline items-center py-2 px-4 mr-3 text-sm font-medium text-gray-700 bg-white rounded-lg border border-white hover:bg-gray-800 hover:text-white hover:border-gray-800"
@@ -35,7 +39,7 @@ export default function Pagination({
       </div>
       <div className="flex w-1/2 justify-end">
         {isNextPage && (
-          <Link href={`/posts/${pageNum + 1}`}>
+          <Link href={nextPath || `/posts/${pageNum + 1}`}>
             <a
               href="#"
               className="inline-flex no-underline items-center py-2 px-4 text-sm font-medium text-gray-700 bg-white rounded-lg border border-white hover:bg-gray-800 hover:text-white hover:border-gray-800"
