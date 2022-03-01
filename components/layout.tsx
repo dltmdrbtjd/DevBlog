@@ -1,15 +1,17 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 export const siteTitle = 'Next.js Sample Website'
 
 export default function Layout({
   children,
-  home,
+  back,
 }: {
   children: React.ReactNode
-  home?: boolean
+  back?: boolean
 }) {
+  const router = useRouter()
   return (
     <div className="container mx-auto">
       <Head>
@@ -28,11 +30,9 @@ export default function Layout({
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <main className="prose max-w-2xl mx-auto mt-28 px-4">{children}</main>
-      {!home && (
+      {!back && (
         <div className="max-w-2xl mx-auto text-white font-bold hover:text-emerald-200 px-4 mb-10">
-          <Link href="/">
-            <a>← Back to home</a>
-          </Link>
+          <button onClick={() => router.back()}>← Back to page</button>
         </div>
       )}
     </div>
