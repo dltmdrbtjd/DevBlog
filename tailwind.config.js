@@ -6,7 +6,7 @@ module.exports = {
   darkMode: 'media',
   theme: {
     extend: {
-      typography: (theme) => ({
+      typography: () => ({
         DEFAULT: {
           css: {
             h1: {
@@ -20,6 +20,7 @@ module.exports = {
             },
             p: {
               color: 'rgb(203 213 225)',
+              margin: 0,
             },
             li: {
               color: 'rgb(203 213 225)',
