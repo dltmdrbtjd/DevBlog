@@ -5,7 +5,7 @@ on:
 name: Deploy to Amazon ECS
 
 env:
-  AWS_REGION: ap-northeast-2
+  AWS_REGION: us-east-1
   ECR_REPOSITORY: myblog
   ECS_SERVICE: myblog
   ECS_CLUSTER: myblog
