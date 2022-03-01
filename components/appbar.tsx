@@ -15,7 +15,7 @@ export default function AppBar() {
     }
   }
   return (
-    <header className="bg-gray-800 py-6 w-full fixed top-0">
+    <header className="bg-gray-800 py-6 w-full fixed top-0 shadow-xl">
       <div className="flex justify-between items-center max-w-2xl mx-auto px-4 text-white">
         <div className="flex items-center">
           <Image

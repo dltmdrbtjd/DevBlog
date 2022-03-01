@@ -4,5 +4,5 @@
 
 body,
 html {
-  @apply bg-gray-700;
+  @apply bg-slate-800;
 }
