@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { NextRouter, useRouter } from 'next/router'
+import Navigation from './Navigation'
 
 export default function AppBar() {
   const router: NextRouter = useRouter()
@@ -29,7 +30,7 @@ export default function AppBar() {
             <a className="ml-4 font-bold">dltmdrbtjd</a>
           </Link>
         </div>
-        <div>
+        <div className="hidden sm:block">
           <Link href="/posts/1">
             <a
               className={`font-bold ${
@@ -58,6 +59,7 @@ export default function AppBar() {
             </a>
           </Link>
         </div>
+        <Navigation />
       </div>
     </header>
   )
