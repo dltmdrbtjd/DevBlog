@@ -18,7 +18,7 @@ export default function Pagination({
           <Link href={prevPath || `/posts/${pageNum - 1}`}>
             <a
               href="#"
-              className="inline-flex justify-start no-underline items-center py-2 px-4 mr-3 text-sm font-medium text-gray-700 bg-white rounded-lg border border-white hover:bg-gray-800 hover:text-white hover:border-gray-800"
+              className="inline-flex justify-start no-underline items-center py-2 px-4 mr-3 text-sm font-medium text-gray-700 bg-white rounded-lg border border-white hover:bg-emerald-500 hover:text-white hover:border-emerald-500"
             >
               <svg
                 className="mr-2 w-5 h-5"
@@ -42,7 +42,7 @@ export default function Pagination({
           <Link href={nextPath || `/posts/${pageNum + 1}`}>
             <a
               href="#"
-              className="inline-flex no-underline items-center py-2 px-4 text-sm font-medium text-gray-700 bg-white rounded-lg border border-white hover:bg-gray-800 hover:text-white hover:border-gray-800"
+              className="inline-flex no-underline items-center py-2 px-4 text-sm font-medium text-gray-700 bg-white rounded-lg border border-white hover:bg-emerald-500 hover:text-white hover:border-emerald-500"
             >
               Next
               <svg

@@ -19,7 +19,9 @@ export default function ListLayout({
             className="border-b-[1px] pt-3 pb-3 border-gray-400 list-none"
           >
             <Link href={`/detail/${path}`} passHref>
-              <a className="text-cyan-100 no-underline text-xl">{title}</a>
+              <a className="text-cyan-100 no-underline text-xl hover:text-emerald-500">
+                {title}
+              </a>
             </Link>
             <p className="my-0">{subheading}</p>
             <div className="flex justify-between w-max">

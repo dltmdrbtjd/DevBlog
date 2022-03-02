@@ -35,7 +35,7 @@ export default function AppBar() {
             <a
               className={`font-bold ${
                 isCategoryHover() === 'post' ? 'text-emerald-200' : ''
-              }`}
+              } hover:text-emerald-200`}
             >
               Post
             </a>
@@ -44,7 +44,7 @@ export default function AppBar() {
             <a
               className={`ml-4 font-bold ${
                 isCategoryHover() === 'category' ? 'text-emerald-200' : ''
-              }`}
+              } hover:text-emerald-200`}
             >
               Category
             </a>
@@ -53,7 +53,7 @@ export default function AppBar() {
             <a
               className={`ml-4 font-bold ${
                 isCategoryHover() === 'about' ? 'text-emerald-200' : ''
-              }`}
+              } hover:text-emerald-200`}
             >
               About Me
             </a>

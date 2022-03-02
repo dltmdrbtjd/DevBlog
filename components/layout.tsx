@@ -30,7 +30,7 @@ export default function Layout({
       </Head>
       <main className="prose max-w-2xl mx-auto mt-28 px-4">{children}</main>
       {!back && (
-        <div className="max-w-2xl mx-auto text-white font-bold hover:text-emerald-200 px-4 mb-10">
+        <div className="max-w-2xl mx-auto text-white font-bold hover:text-emerald-200 px-4 mb-10 mt-10">
           <button onClick={() => router.back()}>← Back to page</button>
         </div>
       )}
