@@ -15,7 +15,7 @@ export default function AppBar() {
     }
   }
   return (
-    <header className="bg-gray-800 py-6 w-full fixed top-0 shadow-xl">
+    <header className="bg-gray-800 py-6 w-full fixed top-0 shadow-xl z-10">
       <div className="flex justify-between items-center max-w-2xl mx-auto px-4 text-white">
         <div className="flex items-center">
           <Image
@@ -23,7 +23,7 @@ export default function AppBar() {
             alt="profile image"
             height={32}
             width={32}
-            className="rounded-full shadow-lg bg-slate-500"
+            className="rounded-full shadow-lg bg-slate-500 z-1"
           />
           <Link href="/">
             <a className="ml-4 font-bold">dltmdrbtjd</a>
