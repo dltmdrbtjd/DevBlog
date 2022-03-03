@@ -16,9 +16,9 @@ export default function Layout({
   return (
     <div className="container mx-auto">
       <Head>
-        <link rel="icon" href="/images/favicon/favicon.ico" />
+        <link rel="icon" href="/favicon/favicon.ico" />
         <meta name="description" content={desc} />
-        <meta property="og:image" content="/images/profile" />
+        <meta property="og:image" content="/images/profile.jpeg" />
         <meta name="og:title" content={title} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
