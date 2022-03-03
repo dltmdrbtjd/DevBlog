@@ -1,4 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
+import Head from 'next/head'
 import Layout from '../../components/layout'
 import ListLayout from '../../components/layouts/List'
 import Pagination from '../../components/pagination'
@@ -17,6 +18,9 @@ export default function PostList({
 }) {
   return (
     <Layout back>
+      <Head>
+        <title>dltmdrbtjd | Post{' '}{pageNum}</title>
+      </Head>
       <ListLayout posts={posts} title={'Post'} />
       <Pagination pageNum={pageNum} isNextPage={isNextPage} />
     </Layout>

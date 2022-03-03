@@ -9,7 +9,7 @@ export default function PostLayout({ post }: { post: Post }) {
   return (
     <>
       <Head>
-        <title>{post.title}</title>
+        <title>dltmdrbtjd | {post.title}</title>
       </Head>
       <article>
         <h1 className="mb-2">{post.title}</h1>
