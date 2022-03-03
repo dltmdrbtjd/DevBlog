@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Layout, { siteTitle } from '../components/layout'
+import Layout from '../components/layout'
 import PostList from '../components/layouts/List'
 import { getAllPosts } from '../lib/posts'
 import { Post } from '../types'
@@ -8,9 +8,9 @@ import { DefaultNumberOfPosts } from '../constant'
 
 export default function Home({ posts }: { posts: Array<Post> }) {
   return (
-    <Layout back>
+    <Layout back title="DevBlog" desc="dltmdrbtjd | DevBlog">
       <Head>
-        <title>{siteTitle}</title>
+        <title>dltmdrbtjd | Home</title>
       </Head>
       <PostList posts={posts} title={'Latest'} />
     </Layout>

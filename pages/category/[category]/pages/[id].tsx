@@ -19,9 +19,9 @@ export default function Category({
   pageNum: number
 }) {
   return (
-    <Layout back>
+    <Layout back title={category} desc={`dltmdrbtjd | ${category}`}>
       <Head>
-        <title>{category}</title>
+        <title>dltmdrbtjd | {category}</title>
       </Head>
       <PostList posts={post} title={category}></PostList>
       <Pagination

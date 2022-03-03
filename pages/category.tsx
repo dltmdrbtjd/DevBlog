@@ -2,6 +2,7 @@ import Layout from '../components/layout'
 import { getAllCategory } from '../lib/posts'
 import { GetStaticProps } from 'next'
 import Link from 'next/link'
+import Head from 'next/head'
 
 export default function Category({
   categories,
@@ -9,7 +10,10 @@ export default function Category({
   categories: Array<{ category: string; count: number }>
 }) {
   return (
-    <Layout back>
+    <Layout back title="Category" desc="dltmdrbtjd | Category">
+      <Head>
+        <title>dltmdrbtjd | Category</title>
+      </Head>
       <h2 className="text-5xl text-center border-b-[2px] border-b-gray-500 pb-5 mb-8">
         Category
       </h2>
