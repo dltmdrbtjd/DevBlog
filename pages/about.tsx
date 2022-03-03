@@ -2,10 +2,14 @@ import Layout from '../components/layout'
 import Image from 'next/image'
 import GithubIcon from '../components/icons/github'
 import LinkedInIcon from '../components/icons/linkedIn'
+import Head from 'next/head'
 
 export default function AboutMe() {
   return (
-    <Layout back>
+    <Layout back title="About Me" desc="dltmdrbtjd | About Me">
+      <Head>
+        <title>dltmdrbtjd | About Me</title>
+      </Head>
       <h2 className="text-5xl text-left border-b-[2px] border-b-gray-500 pb-5 mb-8">
         About Me
       </h2>
@@ -20,6 +24,7 @@ export default function AboutMe() {
           <p className="font-bold text-2xl mt-6 text-white">Lee Seung Gyu</p>
           <p className="mt-1">Software Developer</p>
           <p>Seoul, Korea</p>
+          <p className="text-sm mt-1 text-emerald-300">dltmdrbtjd@gmail.com</p>
           <div className="flex pt-6 space-x-3">
             <GithubIcon />
             <LinkedInIcon />

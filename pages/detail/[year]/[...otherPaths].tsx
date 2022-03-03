@@ -6,7 +6,7 @@ import { Post } from '../../../types'
 
 export default function PostDetail({ post }: { post: Post }) {
   return (
-    <Layout>
+    <Layout title={post.title} desc={`${post.subheading} - ${post.category}`}>
       <PostLayout post={post} />
     </Layout>
   )

@@ -17,9 +17,9 @@ export default function PostList({
   isNextPage: boolean
 }) {
   return (
-    <Layout back>
+    <Layout back title="Post" desc="dltmdrbtjd | Post">
       <Head>
-        <title>dltmdrbtjd | Post{' '}{pageNum}</title>
+        <title>dltmdrbtjd | Post {pageNum}</title>
       </Head>
       <ListLayout posts={posts} title={'Post'} />
       <Pagination pageNum={pageNum} isNextPage={isNextPage} />

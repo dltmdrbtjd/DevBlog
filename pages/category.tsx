@@ -10,7 +10,7 @@ export default function Category({
   categories: Array<{ category: string; count: number }>
 }) {
   return (
-    <Layout back>
+    <Layout back title="Category" desc="dltmdrbtjd | Category">
       <Head>
         <title>dltmdrbtjd | Category</title>
       </Head>

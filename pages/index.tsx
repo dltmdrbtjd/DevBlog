@@ -8,7 +8,7 @@ import { DefaultNumberOfPosts } from '../constant'
 
 export default function Home({ posts }: { posts: Array<Post> }) {
   return (
-    <Layout back>
+    <Layout back title="DevBlog" desc="dltmdrbtjd | DevBlog">
       <Head>
         <title>dltmdrbtjd | Home</title>
       </Head>

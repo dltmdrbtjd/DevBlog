@@ -19,7 +19,7 @@ export default function Category({
   pageNum: number
 }) {
   return (
-    <Layout back>
+    <Layout back title={category} desc={`dltmdrbtjd | ${category}`}>
       <Head>
         <title>dltmdrbtjd | {category}</title>
       </Head>
