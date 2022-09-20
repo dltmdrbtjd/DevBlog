@@ -6,3 +6,8 @@ body,
 html {
   @apply bg-slate-800;
 }
+
+li::marker {
+  color: white !important;
+  font-weight: bold !important;
+}
