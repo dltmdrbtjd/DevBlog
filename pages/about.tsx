@@ -32,14 +32,14 @@ export default function AboutMe() {
         </div>
         <div className="pt-4 pb-8 prose max-w-none xl:col-span-2">
           <p>
-            안녕하세요. 서울에서 근무중인 주니어 개발자{' '}
+            함께 고민하면서 일하는걸 좋아하는 1년차 개발자{' '}
             <span className="font-bold text-white">이승규</span>입니다.
           </p>
           <p className="mt-6">
-            주로 프론트엔드 개발에 관심이 많이있고 사용자에게 더 나은 UI/UX를
-            제공하고 사용성을 높이는것과 디자인 시스템, 성능 최적화 및 SEO부분에
-            관심이 많이 있습니다. 회사에서 프론트엔드 부분을 전담하고 있는것이
-            아니라서 개인적으로 시간이 있을때마다 공부중입니다.
+            주로 프론트엔드에 관심이 많고 좋아하고 현재는 사용자에게 더 나은
+            UI/UX를 제공하고 사용성을 높이는것과 디자인 시스템에 대해서 관심이
+            많고 내가 하는 프로젝트 및 개발이 어떤 비즈니스 임팩트를 줄 수
+            있는지 생각을 많이 하는편입니다.
           </p>
           <strong className="mt-6 block">Language</strong>
           <p>JavaScript / TypeScript / Golang</p>
