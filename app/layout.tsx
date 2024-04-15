@@ -1,3 +1,8 @@
+// ------------- Styles ----------------------
+import '@/styles/global.css';
+//-------------- Components ------------------
+import Header from '@/components/Header';
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html>
@@ -10,6 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="og:title" content={title} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head> */}
+          <Header />
           <main className="prose max-w-2xl mx-auto mt-28 px-4">{children}</main>
           {/* {!back && (
         <div className="max-w-2xl mx-auto text-white font-bold hover:text-emerald-200 px-4 mb-10 mt-10">
