@@ -1,4 +1,4 @@
-import Layout from '../components/layout'
+import Layout from './layout'
 import { getAllCategory } from '../lib/posts'
 import { GetStaticProps } from 'next'
 import Link from 'next/link'

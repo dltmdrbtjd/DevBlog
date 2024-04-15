@@ -1,4 +1,4 @@
-import Layout from '../../../components/layout'
+import Layout from '../../layout'
 import PostLayout from '../../../components/layouts/Post'
 import { getAllPosts } from '../../../lib/posts'
 import { GetStaticProps, GetStaticPaths } from 'next'

@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Layout from '../components/layout'
+import Layout from './layout'
 import PostList from '../components/layouts/List'
 import { getAllPosts } from '../lib/posts'
 import { Post } from '../types'

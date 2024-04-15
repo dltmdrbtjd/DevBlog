@@ -1,4 +1,4 @@
-import Layout from '../components/layout'
+import Layout from './layout'
 import Image from 'next/image'
 import GithubIcon from '../components/icons/github'
 import LinkedInIcon from '../components/icons/linkedIn'

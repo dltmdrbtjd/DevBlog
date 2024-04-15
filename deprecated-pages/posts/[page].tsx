@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
-import Layout from '../../components/layout'
+import Layout from '../layout'
 import ListLayout from '../../components/layouts/List'
 import Pagination from '../../components/pagination'
 import { DefaultNumberOfPosts } from '../../constant'
