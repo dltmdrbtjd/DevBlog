@@ -1,0 +1,49 @@
+'use client';
+
+import Image from 'next/image';
+import Link from 'next/link';
+import { Tab } from '@headlessui/react';
+import { Fragment } from 'react';
+
+const TabLink = ({ href, title }: { href: string; title: string }) => {
+  return (
+    <Tab as={Fragment}>
+      {({ selected }) => (
+        <Link
+          className={`font-bold ${selected ? 'text-emerald-200' : ''} hover:text-emerald-200`}
+          href={href}
+        >
+          {title}
+        </Link>
+      )}
+    </Tab>
+  );
+};
+
+export default function AppBar() {
+  return (
+    <header className="bg-gray-800 py-6 w-full fixed top-0 shadow-xl z-10">
+      <Tab.Group>
+        <Tab.List className="flex justify-between items-center max-w-2xl mx-auto px-4 text-white">
+          <Tab>
+            <div className="flex items-center">
+              <Image
+                src="/images/profile.jpeg"
+                alt="profile image"
+                height={32}
+                width={32}
+                className="rounded-full shadow-lg bg-slate-500 z-1"
+              />
+              <Link className="ml-4 font-bold" href="/">
+                dltmdrbtjd
+              </Link>
+            </div>
+          </Tab>
+          <TabLink href="/posts/1" title="Post" />
+          <TabLink href="/category" title="Category" />
+          <TabLink href="/about" title="About Me" />
+        </Tab.List>
+      </Tab.Group>
+    </header>
+  );
+}
