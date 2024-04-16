@@ -5,21 +5,6 @@ import Link from 'next/link';
 import { Tab } from '@headlessui/react';
 import { Fragment } from 'react';
 
-const TabLink = ({ href, title }: { href: string; title: string }) => {
-  return (
-    <Tab as={Fragment}>
-      {({ selected }) => (
-        <Link
-          className={`font-bold ${selected ? 'text-emerald-200' : ''} hover:text-emerald-200`}
-          href={href}
-        >
-          {title}
-        </Link>
-      )}
-    </Tab>
-  );
-};
-
 export default function AppBar() {
   return (
     <header className="bg-gray-800 py-6 w-full fixed top-0 shadow-xl z-10">
@@ -39,7 +24,7 @@ export default function AppBar() {
               </Link>
             </div>
           </Tab>
-          <TabLink href="/posts/1" title="Post" />
+          <TabLink href="/post/1" title="Post" />
           <TabLink href="/category" title="Category" />
           <TabLink href="/about" title="About Me" />
         </Tab.List>
@@ -47,3 +32,18 @@ export default function AppBar() {
     </header>
   );
 }
+
+const TabLink = ({ href, title }: { href: string; title: string }) => {
+  return (
+    <Tab as={Fragment}>
+      {({ selected }) => (
+        <Link
+          className={`font-bold ${selected ? 'text-emerald-200' : ''} hover:text-emerald-200`}
+          href={href}
+        >
+          {title}
+        </Link>
+      )}
+    </Tab>
+  );
+};
