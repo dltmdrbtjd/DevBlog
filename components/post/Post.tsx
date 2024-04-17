@@ -35,7 +35,6 @@ export default function PostLayout({ post }: { post: Post }) {
       </div>
       <Markdown
         className="text-white"
-        children={post.content}
         components={{
           h1: ({ node, ...props }) => (
             <h1 className="text-[1.75rem] font-bold text-white mt-6" {...props} />
@@ -61,11 +60,12 @@ export default function PostLayout({ post }: { post: Post }) {
               <SyntaxHighlighter
                 {...rest}
                 PreTag="div"
-                children={String(children).replace(/\n$/, '')}
                 language={match[1]}
                 style={tomorrow}
                 ref={null} // Add a null ref to fix the type error
-              />
+              >
+                {String(children).replace(/\n$/, '')}
+              </SyntaxHighlighter>
             ) : (
               <code {...rest} className={className}>
                 {children}
@@ -73,7 +73,9 @@ export default function PostLayout({ post }: { post: Post }) {
             );
           },
         }}
-      />
+      >
+        {post.content}
+      </Markdown>
     </article>
   );
 }
