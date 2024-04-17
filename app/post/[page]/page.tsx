@@ -2,6 +2,20 @@ import Pagination from '@/components/post/Pagination';
 import PostList from '@/components/post/PostList';
 import { DefaultNumberOfPosts } from '@/constant';
 import { getSortedPostsData } from '@/service/post';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Post List',
+  description: 'Post List',
+  robots: 'index, follow',
+  openGraph: {
+    title: 'Post List',
+    description: 'Post List',
+    type: 'website',
+    locale: 'ko_KR',
+    siteName: 'Post List',
+  },
+};
 
 export async function generateStaticParams() {
   const posts = await getSortedPostsData();
