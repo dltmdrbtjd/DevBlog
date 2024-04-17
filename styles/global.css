@@ -11,3 +11,7 @@ li::marker {
   color: white !important;
   font-weight: bold !important;
 }
+
+a {
+  outline: none;
+}
