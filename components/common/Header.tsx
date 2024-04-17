@@ -11,7 +11,7 @@ export default function AppBar() {
       <Tab.Group>
         <Tab.List className="flex justify-between items-center max-w-2xl mx-auto px-4 text-white">
           <Tab>
-            <div className="flex items-center">
+            <Link className="ml-4 font-bold flex items-center gap-2" href="/">
               <Image
                 src="/images/profile.jpeg"
                 alt="profile image"
@@ -19,10 +19,8 @@ export default function AppBar() {
                 width={32}
                 className="rounded-full shadow-lg bg-slate-500 z-1"
               />
-              <Link className="ml-4 font-bold" href="/">
-                dltmdrbtjd
-              </Link>
-            </div>
+              dltmdrbtjd
+            </Link>
           </Tab>
           <TabLink href="/post/1" title="Post" />
           <TabLink href="/category" title="Category" />
