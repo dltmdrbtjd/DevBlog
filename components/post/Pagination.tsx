@@ -12,7 +12,7 @@ export default function Pagination({
   nextPath?: string;
 }) {
   return (
-    <div className="max-w-2xl mt-6 mb-8 flex justify-between itesm-center">
+    <div className="max-w-2xl mb-8 flex justify-between items-center">
       <div className="flex w-1/2 justify-start">
         {pageNum > 1 && (
           <Link

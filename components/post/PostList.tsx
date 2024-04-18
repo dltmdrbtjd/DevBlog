@@ -4,8 +4,8 @@ import { Post } from '@/types';
 
 export default function PostList({ posts, title }: { posts: Post[]; title: string }) {
   return (
-    <section className="text-white pb-10">
-      <h1>{title}</h1>
+    <section className="text-white pb-4">
+      <h1 className="text-[1.75rem] font-bold">{title}</h1>
       <ul className="px-0">
         {posts.map(({ path, date, title, subheading, category }) => (
           <li key={path} className="border-b-[1px] pt-3 pb-3 border-gray-400 list-none">
@@ -16,11 +16,11 @@ export default function PostList({ posts, title }: { posts: Post[]; title: strin
               {title}
             </Link>
             <p className="my-2">{subheading}</p>
-            <div className="flex justify-between w-max my-2">
+            <div className="flex flex-wrap my-2 gap-2">
               {category.map((name) => {
                 return (
                   <Link
-                    className="cursor-pointer px-4 py-1 mr-2 mt-1 rounded-full bg-gray-400 font-semibold text-sm flex align-center w-max text-gray-800 no-underline"
+                    className="cursor-pointer px-4 py-1 rounded-xl bg-gray-400 font-semibold text-sm flex align-center text-gray-800 no-underline"
                     href={`/category/${name}/pages/1`}
                     key={name}
                   >
