@@ -16,7 +16,7 @@ export default async function Category() {
               className="flex justfiy-center items-center mt-2 mr-8 ml-8 mb-2 h-6"
             >
               <Link
-                href={`/category/${category}/pages/1`}
+                href={`/category/${category}/1`}
                 className="text-xl no-underline text-green-200 hover:text-green-400"
               >
                 {category}
