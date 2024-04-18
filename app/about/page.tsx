@@ -16,7 +16,7 @@ export default function AboutMe() {
             className="rounded-full"
           />
           <p className="font-bold text-2xl mt-6 text-white">Lee Seung Gyu</p>
-          <p className="mt-1">Software Developer</p>
+          <p className="mt-1">Frontend Engineer</p>
           <p>Seoul, Korea</p>
           <p className="text-sm mt-1 text-emerald-300">dltmdrbtjd@gmail.com</p>
           <div className="flex pt-6 space-x-3">
@@ -48,7 +48,6 @@ export default function AboutMe() {
             어드민 서비스의 경우는 Nest.js, MongoDB, MySQL을 사용하여 프론트엔드와 백엔드 함께
             개발하고 있습니다.
           </p>
-          <p className="mt-6">현재는</p>
           <strong className="mt-6 block">Language</strong>
           <p>JavaScript / TypeScript / Golang</p>
           <strong className="mt-3 block">Front-End</strong>
