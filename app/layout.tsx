@@ -2,6 +2,7 @@ import '@/styles/global.css';
 import Header from '@/components/common/Header';
 import GlobalLayout from '@/components/common/GlobalLayout';
 import { Metadata } from 'next';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 export const metadata: Metadata = {
   title: 'Dev Blog',
@@ -26,6 +27,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <GlobalLayout>{children}</GlobalLayout>
       </body>
+      {process.env.NEXT_PUBLIC_STAGE === 'prod' && (
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID!} />
+      )}
     </html>
   );
 }
