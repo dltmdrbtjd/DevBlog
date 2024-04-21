@@ -17,14 +17,14 @@ export default function PostList({ posts, title }: { posts: Post[]; title: strin
             </Link>
             <p className="my-2">{subheading}</p>
             <div className="flex flex-wrap my-2 gap-2">
-              {category.map((name) => {
+              {category.map((c) => {
                 return (
                   <Link
                     className="cursor-pointer px-4 py-1 rounded-xl bg-gray-400 font-semibold text-sm flex align-center text-gray-800 no-underline"
-                    href={`/category/${name}/pages/1`}
-                    key={name}
+                    href={`/category/${c}/1`}
+                    key={c}
                   >
-                    {name}
+                    {c}
                   </Link>
                 );
               })}
