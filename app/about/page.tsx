@@ -38,7 +38,7 @@ export default function AboutMe() {
           <p className="text-xl mt-6 font-bold">경력</p>
           <ul className="mt-2 list-disc">
             <strong>어스얼라이언스 (2022.11 ~ ing)</strong>
-            <li className="ml-4 mt-2">서비스: 금융 콘텐츠 서비스 플랫폼</li>
+            <li className="ml-4 mt-2">서비스: 금융 콘텐츠 플랫폼</li>
             <li className="ml-4 mt-2">메인 사용 기술: TypeScript ,React, Next.js, Storybook</li>
             <li className="ml-4 mt-2">
               디자인 시스템: 디자이너 분들과 초기 디자인 시스템 구성/적용 및 확장중
@@ -63,7 +63,7 @@ export default function AboutMe() {
           </ul>
           <ul className="mt-6 list-disc">
             <strong>코드브릭 (2021.11 ~ 2022.10)</strong>
-            <li className="ml-4 mt-2">서비스: 인도네시아 이커머스 서비스 플랫폼</li>
+            <li className="ml-4 mt-2">서비스: 인도네시아 이커머스 플랫폼</li>
             <li className="ml-4 mt-2">메인 사용 기술: Go, TypeScript ,Vue, Nuxt.js</li>
             <li className="ml-4 mt-2">
               Google Marketing: 진입장벽이 제법 높은 구글 마케팅을 유저들이 편한 UI/UX 및 연동하기
