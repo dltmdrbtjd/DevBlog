@@ -45,13 +45,16 @@ export default function PostLayout({ post }: { post: Post }) {
           h3: ({ node, ...props }) => (
             <h3 className="text-[1.25rem] font-bold text-white mt-6" {...props} />
           ),
+          h4: ({ node, ...props }) => (
+            <h4 className="text-[1.125rem] font-bold text-white mt-6" {...props} />
+          ),
           ul: ({ node, ...props }) => <ul className="ml-3 list-disc" {...props} />,
           li: ({ node, ...props }) => (
             <li className="font-light leading-[1.75rem] ml-3 my-3" {...props} />
           ),
           ol: ({ node, ...props }) => <ol className="ml-3 list-decimal" {...props} />,
           a: ({ node, ...props }) => (
-            <a className="text-cyan-100 hover:text-emerald-500" {...props} />
+            <a className="text-cyan-100 hover:text-emerald-500" {...props} target="_blank" />
           ),
           code(props) {
             const { children, className, node, ...rest } = props;
