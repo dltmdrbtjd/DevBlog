@@ -26,8 +26,8 @@ export default function AboutMe() {
         </div>
         <div className="pt-4 pb-8 prose max-w-none xl:col-span-2">
           <p>
-            함께 고민하면서 일하는걸 좋아하는 3년차 개발자{' '}
-            <span className="font-bold text-white">이승규</span>입니다.
+            함께 고민하면서 일하는걸 좋아하는
+            <span className="font-bold text-white"> 이승규</span>입니다.
           </p>
           <p className="mt-6">
             TypeScript, React, Next.js를 사용하여 프론트엔드 개발을 하고있습니다. 주로 프론트엔드에
@@ -39,27 +39,26 @@ export default function AboutMe() {
           <ul className="mt-2 list-disc">
             <strong>어스얼라이언스 (2022.11 ~ ing)</strong>
             <li className="ml-4 mt-2">서비스: 금융 콘텐츠 플랫폼</li>
-            <li className="ml-4 mt-2">메인 사용 기술: TypeScript ,React, Next.js, Storybook</li>
             <li className="ml-4 mt-2">
-              디자인 시스템: 디자이너 분들과 초기 디자인 시스템 구성/적용 및 확장중
+              메인 사용 기술: TypeScript ,React, Next.js, Storybook, Vitest, tailwindcss, Sentry
+            </li>
+            <li className="ml-4 mt-2">Vercel 기반 배포 환경 운영 및 비용 관리</li>
+            <li className="ml-4 mt-2">turborepo기반 FE monorepo 구조 적용</li>
+            <li className="ml-4 mt-2">모니터링: Sentry, Datadog RUM</li>
+            <li className="ml-4 mt-2">디자인 시스템: 초기 디자인 시스템 구성/적용 및 확장중</li>
+            <li className="ml-4 mt-2">
+              앱 내 웹뷰 개발: Flutter 앱에서 콘텐츠를 표시하기 위한 웹뷰 개발
             </li>
             <li className="ml-4 mt-2">
-              앱 내 웹뷰 개발: Flutter 앱에서 콘텐츠를 표시하기 위한 웹뷰 개발 담당
+              콘텐츠 에디터/뷰어: tiptap editor 기반 커스터마이징 콘텐츠 에디터 및 뷰어 개발
             </li>
             <li className="ml-4 mt-2">
-              콘텐츠 뷰어: 동영상 및 오디오 재생이 가능한 콘텐츠 뷰어 개발
+              구독형 콘텐츠 서비스: 구독형 프리미엄 콘텐츠 서비스를 제공하는 서비스 개발
             </li>
             <li className="ml-4 mt-2">
-              상품 페이지 및 결제 시스템: 상품/결제 페이지 개발 및 결제 시스템 연동
+              어드민 서비스: 대시보드 및 운영 관리를 위한 어드민 서비스 개발
             </li>
-            <li className="ml-4 mt-2">
-              에디터 커스터마이징: tiptap 기반의 에디터 커스터마이징으로 콘텐츠 작성 영역 및 뷰어
-              개발
-            </li>
-            <li className="ml-4 mt-2">
-              어드민 서비스: Nest.js, MongoDB, MySQL을 이용한 어드민 서비스 초기 개발. 현재는
-              프론트엔드에 집중
-            </li>
+            <li className="ml-4 mt-2">커머스 서비스: 도서 및 강연등등의 커머스 서비스 개발</li>
           </ul>
           <ul className="mt-6 list-disc">
             <strong>코드브릭 (2021.11 ~ 2022.10)</strong>
