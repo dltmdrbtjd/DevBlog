@@ -1,26 +1,26 @@
-import Pagination from '@/components/post/Pagination';
-import PostList from '@/components/post/PostList';
-import { DefaultNumberOfPosts } from '@/constant';
-import { getSortedPostsData } from '@/service/post';
-import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import { getSortedPostsData, Pagination, PostList } from "@/src/entities/post";
+import { DefaultNumberOfPosts } from "@/src/shared/model";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: 'Post List',
-  description: 'Post List',
-  robots: 'index, follow',
+  title: "Post List",
+  description: "Post List",
+  robots: "index, follow",
   openGraph: {
-    title: 'Post List',
-    description: 'Post List',
-    type: 'website',
-    locale: 'ko_KR',
-    siteName: 'Post List',
+    title: "Post List",
+    description: "Post List",
+    type: "website",
+    locale: "ko_KR",
+    siteName: "Post List",
   },
 };
 
 export async function generateStaticParams() {
   const posts = await getSortedPostsData();
-  const paths = [...new Array(Math.round(posts.length / DefaultNumberOfPosts)).keys()].map((i) => ({
+  const paths = [
+    ...new Array(Math.round(posts.length / DefaultNumberOfPosts)).keys(),
+  ].map((i) => ({
     params: { page: `${i + 1}` },
   }));
 

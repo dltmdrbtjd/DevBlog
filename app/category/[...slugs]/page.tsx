@@ -1,7 +1,10 @@
-import Pagination from '@/components/post/Pagination';
-import PostList from '@/components/post/PostList';
-import { DefaultNumberOfPosts } from '@/constant';
-import { getAllCategory, getSortedPostsData } from '@/service/post';
+import {
+  getAllCategory,
+  getSortedPostsData,
+  Pagination,
+  PostList,
+} from "@/src/entities/post";
+import { DefaultNumberOfPosts } from "@/src/shared/model";
 
 interface Props {
   params: Promise<{
@@ -17,25 +20,27 @@ export async function generateMetadata(props: Props) {
   const id = slugs[1];
   const pageNum = Number.parseInt(id);
 
-  const postsWithCategory = posts.filter((post) => post.category.find((t) => t === category));
+  const postsWithCategory = posts.filter((post) =>
+    post.category.find((t) => t === category)
+  );
 
   const postList = postsWithCategory.slice(
     (pageNum - 1) * DefaultNumberOfPosts,
-    pageNum * DefaultNumberOfPosts,
+    pageNum * DefaultNumberOfPosts
   );
 
-  const description = postList.map((post) => post.title).join(', ');
+  const description = postList.map((post) => post.title).join(", ");
 
   return {
     title: `${category} - ${id}`,
     description,
-    robots: 'index, follow',
+    robots: "index, follow",
     openGraph: {
       title: `${category} - ${id}`,
       description,
-      type: 'website',
-      locale: 'ko_KR',
-      siteName: 'Post List By Category',
+      type: "website",
+      locale: "ko_KR",
+      siteName: "Post List By Category",
     },
   };
 }
@@ -45,10 +50,14 @@ export async function generateStaticParams() {
   const categories = await getAllCategory();
 
   const paths = categories.flatMap(({ category }) => {
-    const categoryPosts = posts.filter((post) => post.category.find((t) => t === category));
+    const categoryPosts = posts.filter((post) =>
+      post.category.find((t) => t === category)
+    );
     const categoryCnt = categoryPosts.length;
 
-    return [...new Array(Math.round(categoryCnt / DefaultNumberOfPosts)).keys()].map((i) => ({
+    return [
+      ...new Array(Math.round(categoryCnt / DefaultNumberOfPosts)).keys(),
+    ].map((i) => ({
       params: { category, id: `${i + 1}` },
     }));
   });
@@ -67,7 +76,9 @@ export default async function Category(props: Props) {
   const startIdx = (pageNum - 1) * DefaultNumberOfPosts;
   const lastIdx = startIdx + DefaultNumberOfPosts;
 
-  const postsWithCategory = posts.filter((post) => post.category.find((t) => t === category));
+  const postsWithCategory = posts.filter((post) =>
+    post.category.find((t) => t === category)
+  );
 
   const post = postsWithCategory.slice(startIdx, lastIdx);
   const isNextPage = postsWithCategory.length / DefaultNumberOfPosts > pageNum;

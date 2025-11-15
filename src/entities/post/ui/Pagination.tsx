@@ -1,6 +1,6 @@
-import Link from 'next/link';
+import Link from "next/link";
 
-export default function Pagination({
+export function Pagination({
   pageNum,
   isNextPage,
   prevPath,

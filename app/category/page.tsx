@@ -1,7 +1,7 @@
-import { getAllCategory } from '@/service/post';
-import Link from 'next/link';
+import { getAllCategory } from "@/src/entities/post";
+import Link from "next/link";
 
-export default async function Category() {
+export default async function CategoryPage() {
   const categories = await getAllCategory();
   return (
     <div>

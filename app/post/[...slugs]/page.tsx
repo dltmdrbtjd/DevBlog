@@ -1,5 +1,8 @@
-import PostLayout from '@/components/post/Post';
-import { getSortedPostsData } from '@/service/post';
+import {
+  PostBackButton,
+  PostDetail,
+  getSortedPostsData,
+} from "@/src/entities/post";
 
 interface Props {
   params: Promise<{
@@ -10,20 +13,22 @@ interface Props {
 export async function generateMetadata(props: Props) {
   const params = await props.params;
   const posts = await getSortedPostsData();
-  const fullPath = decodeURIComponent([...(params.slugs as string[])].join('/'));
+  const fullPath = decodeURIComponent(
+    [...(params.slugs as string[])].join("/")
+  );
 
   const post = posts.find((p) => p?.path === fullPath);
 
   return {
     title: post?.title,
-    description: post?.content.replaceAll('\n', '').slice(0, 150),
-    robots: 'index, follow',
+    description: post?.content.replaceAll("\n", "").slice(0, 150),
+    robots: "index, follow",
     openGraph: {
       title: post?.title,
-      description: post?.content.replaceAll('\n', '').slice(0, 150),
-      type: 'article',
-      locale: 'ko_KR',
-      siteName: 'Dev Blog',
+      description: post?.content.replaceAll("\n", "").slice(0, 150),
+      type: "article",
+      locale: "ko_KR",
+      siteName: "Dev Blog",
     },
   };
 }
@@ -31,16 +36,18 @@ export async function generateMetadata(props: Props) {
 export async function generateStaticParams() {
   const posts = await getSortedPostsData();
   const paths = posts.map((post) => ({
-    params: { slugs: post.path.split('/') },
+    params: { slugs: post.path.split("/") },
   }));
 
   return paths;
 }
 
-export default async function PostDetail(props: Props) {
+export default async function PostDetailPage(props: Props) {
   const params = await props.params;
   const posts = await getSortedPostsData();
-  const fullPath = decodeURIComponent([...(params.slugs as string[])].join('/'));
+  const fullPath = decodeURIComponent(
+    [...(params.slugs as string[])].join("/")
+  );
 
   const post = posts.find((p) => p?.path === fullPath);
 
@@ -48,5 +55,10 @@ export default async function PostDetail(props: Props) {
     return <div>Not Found</div>;
   }
 
-  return <PostLayout post={post} />;
+  return (
+    <div>
+      <PostBackButton />
+      <PostDetail post={post} />
+    </div>
+  );
 }

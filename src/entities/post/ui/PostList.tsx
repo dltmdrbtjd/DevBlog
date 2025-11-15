@@ -1,14 +1,17 @@
-import Date from '@/components/post/Date';
-import type { Post } from '@/types';
-import Link from 'next/link';
+import { PostDate } from "./PostDate";
+import type { Post } from "@/src/entities/post/model/types";
+import Link from "next/link";
 
-export default function PostList({ posts, title }: { posts: Post[]; title: string }) {
+export function PostList({ posts, title }: { posts: Post[]; title: string }) {
   return (
     <section className="text-white pb-4">
       <h1 className="text-[1.75rem] font-bold">{title}</h1>
       <ul className="px-0">
         {posts.map(({ path, date, title, subheading, category }) => (
-          <li key={path} className="border-b-[1px] pt-3 pb-3 border-gray-400 list-none">
+          <li
+            key={path}
+            className="border-b-[1px] pt-3 pb-3 border-gray-400 list-none"
+          >
             <Link
               className="text-cyan-100 no-underline text-xl hover:text-emerald-500"
               href={`/post/${path}`}
@@ -30,7 +33,7 @@ export default function PostList({ posts, title }: { posts: Post[]; title: strin
               })}
             </div>
             <small>
-              <Date dateString={date} />
+              <PostDate dateString={date} />
             </small>
           </li>
         ))}

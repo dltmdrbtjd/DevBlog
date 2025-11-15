@@ -1,6 +1,5 @@
-import PostList from '@/components/post/PostList';
-import { DefaultNumberOfPosts } from '@/constant';
-import { getSortedPostsData } from '@/service/post';
+import { getSortedPostsData, PostList } from "@/src/entities/post";
+import { DefaultNumberOfPosts } from "@/src/shared/model";
 
 export default async function Home() {
   const posts = await getSortedPostsData();

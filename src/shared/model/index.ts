@@ -1,0 +1,1 @@
+export { DefaultNumberOfPosts } from "./constants";
