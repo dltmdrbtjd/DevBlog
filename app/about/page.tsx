@@ -100,7 +100,7 @@ export default function AboutMe() {
           <strong className="mt-3 block">Communication</strong>
           <p>Jira, Confluence, Notion, Slack, Figma</p>
           <strong className="mt-3 block">Monitor</strong>
-          <p>Setnry, Datadog RUM</p>
+          <p>Sentry, Datadog RUM</p>
           <strong className="mt-3 block">ETC</strong>
           <p>Docker, Google Analytics(GA, Gtag)</p>
         </div>
