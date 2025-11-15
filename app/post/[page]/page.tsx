@@ -2,7 +2,8 @@ import Pagination from '@/components/post/Pagination';
 import PostList from '@/components/post/PostList';
 import { DefaultNumberOfPosts } from '@/constant';
 import { getSortedPostsData } from '@/service/post';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: 'Post List',
@@ -30,15 +31,14 @@ interface Params {
   page: string;
 }
 
-export default async function PostListPage({ params }: { params: Params }) {
+export default async function PostListPage(props: { params: Promise<Params> }) {
+  const params = await props.params;
   const allPosts = await getSortedPostsData();
   const { page } = params;
-  const pageNum = parseInt(page);
+  const pageNum = Number.parseInt(page);
 
-  if (isNaN(pageNum) || pageNum < 1) {
-    return {
-      notFound: true,
-    };
+  if (Number.isNaN(pageNum) || pageNum < 1) {
+    notFound();
   }
 
   const startIdx = (pageNum - 1) * DefaultNumberOfPosts;

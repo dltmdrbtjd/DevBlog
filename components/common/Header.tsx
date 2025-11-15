@@ -1,8 +1,8 @@
 'use client';
 
+import { Tab } from '@headlessui/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Tab } from '@headlessui/react';
 import { Fragment } from 'react';
 
 export default function AppBar() {

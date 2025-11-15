@@ -1,9 +1,9 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
+import fs from 'node:fs';
+import path from 'node:path';
 import { globSync } from 'glob';
-import { Post } from '../types';
+import matter from 'gray-matter';
 import { cache } from 'react';
+import type { Post } from '../types';
 
 const postsDirectory = path.join(process.cwd(), 'posts');
 
@@ -31,25 +31,24 @@ export const getSortedPostsData = cache(async (): Promise<Post[]> => {
           date,
           path,
         };
-        return [...prev, result];
+        prev.push(result);
       }
       return prev;
     }, [] as Post[])
     .sort((a, b) => {
       if (a.date < b.date) {
         return 1;
-      } else {
-        return -1;
       }
+      return -1;
     });
   return posts;
 });
 
 export const getAllCategory = async (): Promise<Array<{ category: string; count: number }>> => {
   const categories: string[] = (await getSortedPostsData()).reduce<string[]>((prev, cur) => {
-    cur.category.forEach((tag: string) => {
+    for (const tag of cur.category) {
       prev.push(tag);
-    });
+    }
     return prev;
   }, []);
 

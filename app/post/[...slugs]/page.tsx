@@ -2,12 +2,13 @@ import PostLayout from '@/components/post/Post';
 import { getSortedPostsData } from '@/service/post';
 
 interface Props {
-  params: {
+  params: Promise<{
     slugs: string[];
-  };
+  }>;
 }
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata(props: Props) {
+  const params = await props.params;
   const posts = await getSortedPostsData();
   const fullPath = decodeURIComponent([...(params.slugs as string[])].join('/'));
 
@@ -36,7 +37,8 @@ export async function generateStaticParams() {
   return paths;
 }
 
-export default async function PostDetail({ params }: Props) {
+export default async function PostDetail(props: Props) {
+  const params = await props.params;
   const posts = await getSortedPostsData();
   const fullPath = decodeURIComponent([...(params.slugs as string[])].join('/'));
 

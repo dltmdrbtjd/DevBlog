@@ -1,12 +1,12 @@
 'use client';
 
+import Date from '@/components/post/Date';
+import type { Post } from '@/types';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import Markdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/cjs/styles/prism';
-import { useRouter } from 'next/navigation';
-import { Post } from '@/types';
-import Date from '@/components/post/Date';
 
 export default function PostLayout({ post }: { post: Post }) {
   const router = useRouter();
@@ -14,7 +14,9 @@ export default function PostLayout({ post }: { post: Post }) {
   return (
     <article className="pb-20">
       <div className="max-w-2xl mx-auto text-white font-bold hover:text-emerald-200 mb-10 mt-10">
-        <button onClick={() => router.back()}>← Back to page</button>
+        <button type="button" onClick={() => router.back()}>
+          ← Back to page
+        </button>
       </div>
       <h1 className="mb-2 text-[2rem] text-white font-bold">{post.title}</h1>
       <div className="flex justify-between w-max mb-2">

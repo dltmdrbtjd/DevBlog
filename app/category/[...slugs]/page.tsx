@@ -4,17 +4,18 @@ import { DefaultNumberOfPosts } from '@/constant';
 import { getAllCategory, getSortedPostsData } from '@/service/post';
 
 interface Props {
-  params: {
+  params: Promise<{
     slugs: string[];
-  };
+  }>;
 }
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata(props: Props) {
+  const params = await props.params;
   const posts = await getSortedPostsData();
   const { slugs } = params;
   const category = decodeURIComponent(slugs[0]);
   const id = slugs[1];
-  const pageNum = parseInt(id);
+  const pageNum = Number.parseInt(id);
 
   const postsWithCategory = posts.filter((post) => post.category.find((t) => t === category));
 
@@ -55,12 +56,13 @@ export async function generateStaticParams() {
   return paths;
 }
 
-export default async function Category({ params }: Props) {
+export default async function Category(props: Props) {
+  const params = await props.params;
   const posts = await getSortedPostsData();
   const { slugs } = params;
   const category = decodeURIComponent(slugs[0]);
   const id = slugs[1];
-  const pageNum = parseInt(id);
+  const pageNum = Number.parseInt(id);
 
   const startIdx = (pageNum - 1) * DefaultNumberOfPosts;
   const lastIdx = startIdx + DefaultNumberOfPosts;

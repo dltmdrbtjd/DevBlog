@@ -1,1 +1,1 @@
-export const DefaultNumberOfPosts = 4
+export const DefaultNumberOfPosts = 4;

@@ -10,7 +10,7 @@ export default function AboutMe() {
         <div className="flex flex-col items-center pt-4 space-x-2">
           <Image
             alt="profile image"
-            src={`/images/profile.jpeg`}
+            src={'/images/profile.jpeg'}
             width={200}
             height={200}
             className="rounded-full"

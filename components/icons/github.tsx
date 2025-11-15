@@ -1,7 +1,10 @@
 export default function GithubIcon() {
   return (
     <a href="https://github.com/dltmdrbtjd" target="_blank" rel="noreferrer">
-      <button className="bg-gray-700 p-2 font-semibold text-white inline-flex items-center space-x-2 rounded">
+      <button
+        type="button"
+        className="bg-gray-700 p-2 font-semibold text-white inline-flex items-center space-x-2 rounded"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
@@ -21,5 +24,5 @@ export default function GithubIcon() {
         </svg>
       </button>
     </a>
-  )
+  );
 }

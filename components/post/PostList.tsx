@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import Date from '@/components/post/Date';
-import { Post } from '@/types';
+import type { Post } from '@/types';
+import Link from 'next/link';
 
 export default function PostList({ posts, title }: { posts: Post[]; title: string }) {
   return (

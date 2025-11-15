@@ -1,8 +1,8 @@
 import '@/styles/global.css';
-import Header from '@/components/common/Header';
 import GlobalLayout from '@/components/common/GlobalLayout';
-import { Metadata } from 'next';
+import Header from '@/components/common/Header';
 import { GoogleAnalytics } from '@next/third-parties/google';
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Dev Blog',
@@ -22,13 +22,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html>
+    <html lang="ko">
       <body>
         <Header />
         <GlobalLayout>{children}</GlobalLayout>
       </body>
-      {process.env.NEXT_PUBLIC_STAGE === 'prod' && (
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID!} />
+      {process.env.NEXT_PUBLIC_STAGE === 'prod' && process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID && (
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID} />
       )}
     </html>
   );
