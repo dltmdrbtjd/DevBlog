@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function AboutMe() {
   return (
     <div className="text-white">
-      <h2 className="text-5xl text-left border-b-[2px] border-b-gray-500 pb-5 mb-8">
+      <h2 className="text-5xl text-left border-b-2 border-b-gray-500 pb-5 mb-8">
         About Me
       </h2>
       <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">

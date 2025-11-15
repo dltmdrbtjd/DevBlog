@@ -10,7 +10,7 @@ export function PostList({ posts, title }: { posts: Post[]; title: string }) {
         {posts.map(({ path, date, title, subheading, category }) => (
           <li
             key={path}
-            className="border-b-[1px] pt-3 pb-3 border-gray-400 list-none"
+            className="border-b pt-3 pb-3 border-gray-400 list-none"
           >
             <Link
               className="text-cyan-100 no-underline text-xl hover:text-emerald-500"

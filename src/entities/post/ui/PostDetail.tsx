@@ -56,7 +56,7 @@ export function PostDetail({ post }: { post: Post }) {
             <ul className="ml-3 list-disc" {...props} />
           ),
           li: ({ node, ...props }) => (
-            <li className="font-light leading-[1.75rem] ml-3 my-3" {...props} />
+            <li className="font-light leading-7 ml-3 my-3" {...props} />
           ),
           ol: ({ node, ...props }) => (
             <ol className="ml-3 list-decimal" {...props} />

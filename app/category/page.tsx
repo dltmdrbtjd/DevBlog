@@ -5,7 +5,7 @@ export default async function CategoryPage() {
   const categories = await getAllCategory();
   return (
     <div>
-      <h2 className="text-5xl text-center border-b-[2px] border-b-gray-500 pb-5 mb-8 text-white">
+      <h2 className="text-5xl text-center border-b-2 border-b-gray-500 pb-5 mb-8 text-white">
         Category
       </h2>
       <div className="flex flex-wrap max-w-xl mx-auto">
