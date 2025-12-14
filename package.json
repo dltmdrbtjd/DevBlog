@@ -17,7 +17,7 @@
     "glob": "^11.0.0",
     "gray-matter": "^4.0.3",
     "memoizee": "^0.4.17",
-    "next": "^16.0.2",
+    "next": "16.0.10",
     "postcss-nesting": "^13.0.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
