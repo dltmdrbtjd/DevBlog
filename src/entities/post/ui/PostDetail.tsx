@@ -1,9 +1,9 @@
-import type { Post } from "../model/types";
-import Link from "next/link";
-import Markdown from "react-markdown";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { tomorrow } from "react-syntax-highlighter/dist/cjs/styles/prism";
-import { PostDate } from "./PostDate";
+import Link from 'next/link';
+import Markdown from 'react-markdown';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { tomorrow } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import type { Post } from '../model/types';
+import { PostDate } from './PostDate';
 
 export function PostDetail({ post }: { post: Post }) {
   return (
@@ -25,72 +25,53 @@ export function PostDetail({ post }: { post: Post }) {
       <div className="text-white text-[1.25rem] my-2">
         <PostDate dateString={post.date} />
       </div>
-      <Markdown
-        className="text-white"
-        components={{
-          h1: ({ node, ...props }) => (
-            <h1
-              className="text-[1.75rem] font-bold text-white mt-6"
-              {...props}
-            />
-          ),
-          h2: ({ node, ...props }) => (
-            <h2
-              className="text-[1.5rem] font-bold text-white mt-6"
-              {...props}
-            />
-          ),
-          h3: ({ node, ...props }) => (
-            <h3
-              className="text-[1.25rem] font-bold text-white mt-6"
-              {...props}
-            />
-          ),
-          h4: ({ node, ...props }) => (
-            <h4
-              className="text-[1.125rem] font-bold text-white mt-6"
-              {...props}
-            />
-          ),
-          ul: ({ node, ...props }) => (
-            <ul className="ml-3 list-disc" {...props} />
-          ),
-          li: ({ node, ...props }) => (
-            <li className="font-light leading-7 ml-3 my-3" {...props} />
-          ),
-          ol: ({ node, ...props }) => (
-            <ol className="ml-3 list-decimal" {...props} />
-          ),
-          a: ({ node, ...props }) => (
-            <a
-              className="text-cyan-100 hover:text-emerald-500"
-              {...props}
-              target="_blank"
-            />
-          ),
-          code(props) {
-            const { children, className, node, ...rest } = props;
-            const match = /language-(\w+)/.exec(className || "");
-            return match ? (
-              <SyntaxHighlighter
-                {...rest}
-                PreTag="div"
-                language={match[1]}
-                style={tomorrow}
-                ref={null} // Add a null ref to fix the type error
-              >
-                {String(children).replace(/\n$/, "")}
-              </SyntaxHighlighter>
-            ) : (
-              <code {...rest} className={className}>
-                {children}
-              </code>
-            );
-          },
-        }}
-      >
-        {post.content}
-      </Markdown>
+      <div className="text-white">
+        <Markdown
+          components={{
+            h1: ({ node, ...props }) => (
+              <h1 className="text-[1.75rem] font-bold text-white mt-6" {...props} />
+            ),
+            h2: ({ node, ...props }) => (
+              <h2 className="text-[1.5rem] font-bold text-white mt-6" {...props} />
+            ),
+            h3: ({ node, ...props }) => (
+              <h3 className="text-[1.25rem] font-bold text-white mt-6" {...props} />
+            ),
+            h4: ({ node, ...props }) => (
+              <h4 className="text-[1.125rem] font-bold text-white mt-6" {...props} />
+            ),
+            ul: ({ node, ...props }) => <ul className="ml-3 list-disc" {...props} />,
+            li: ({ node, ...props }) => (
+              <li className="font-light leading-7 ml-3 my-3" {...props} />
+            ),
+            ol: ({ node, ...props }) => <ol className="ml-3 list-decimal" {...props} />,
+            a: ({ node, ...props }) => (
+              <a className="text-cyan-100 hover:text-emerald-500" {...props} target="_blank" />
+            ),
+            code(props) {
+              const { children, className, node, ...rest } = props;
+              const match = /language-(\w+)/.exec(className || '');
+              return match ? (
+                <SyntaxHighlighter
+                  {...rest}
+                  PreTag="div"
+                  language={match[1]}
+                  style={tomorrow}
+                  ref={null} // Add a null ref to fix the type error
+                >
+                  {String(children).replace(/\n$/, '')}
+                </SyntaxHighlighter>
+              ) : (
+                <code {...rest} className={className}>
+                  {children}
+                </code>
+              );
+            },
+          }}
+        >
+          {post.content}
+        </Markdown>
+      </div>
     </article>
   );
 }

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 export function Pagination({
   pageNum,
@@ -24,6 +24,8 @@ export function Pagination({
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-label="Previous"
             >
               <path
                 fillRule="evenodd"
@@ -47,6 +49,8 @@ export function Pagination({
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-label="Next"
             >
               <path
                 fillRule="evenodd"

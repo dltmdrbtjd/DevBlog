@@ -1,6 +1,6 @@
-import { PostDate } from "./PostDate";
-import type { Post } from "@/src/entities/post/model/types";
-import Link from "next/link";
+import Link from 'next/link';
+import type { Post } from '@/src/entities/post/model/types';
+import { PostDate } from './PostDate';
 
 export function PostList({ posts, title }: { posts: Post[]; title: string }) {
   return (
@@ -8,10 +8,7 @@ export function PostList({ posts, title }: { posts: Post[]; title: string }) {
       <h1 className="text-[1.75rem] font-bold">{title}</h1>
       <ul className="px-0">
         {posts.map(({ path, date, title, subheading, category }) => (
-          <li
-            key={path}
-            className="border-b pt-3 pb-3 border-gray-400 list-none"
-          >
+          <li key={path} className="border-b pt-3 pb-3 border-gray-400 list-none">
             <Link
               className="text-cyan-100 no-underline text-xl hover:text-emerald-500"
               href={`/post/${path}`}

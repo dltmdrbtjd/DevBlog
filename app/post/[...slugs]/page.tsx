@@ -1,8 +1,4 @@
-import {
-  PostBackButton,
-  PostDetail,
-  getSortedPostsData,
-} from "@/src/entities/post";
+import { getSortedPostsData, PostBackButton, PostDetail } from '@/src/entities/post';
 
 interface Props {
   params: Promise<{
@@ -13,31 +9,29 @@ interface Props {
 export async function generateMetadata(props: Props) {
   const params = await props.params;
   const posts = await getSortedPostsData();
-  const fullPath = decodeURIComponent(
-    [...(params.slugs as string[])].join("/")
-  );
+  const fullPath = decodeURIComponent([...(params.slugs as string[])].join('/'));
 
   const post = posts.find((p) => p?.path === fullPath);
-  const baseUrl = "https://dltmdrbtjd.dev";
+  const baseUrl = 'https://dltmdrbtjd.dev';
   const url = `${baseUrl}/post/${fullPath}`;
-  const description = post?.content.replaceAll("\n", "").slice(0, 150) || "";
+  const description = post?.content.replaceAll('\n', '').slice(0, 150) || '';
   const ogImage = `${baseUrl}/images/profile.jpeg`;
 
   return {
     title: post?.title,
     description,
-    keywords: post?.category.join(", "),
-    robots: "index, follow",
+    keywords: post?.category.join(', '),
+    robots: 'index, follow',
     alternates: {
       canonical: url,
     },
     openGraph: {
       title: post?.title,
       description,
-      type: "article",
-      locale: "ko_KR",
+      type: 'article',
+      locale: 'ko_KR',
       url,
-      siteName: "Dev Blog",
+      siteName: 'Dev Blog',
       images: [
         {
           url: ogImage,
@@ -48,11 +42,11 @@ export async function generateMetadata(props: Props) {
       ],
       publishedTime: post?.date,
       modifiedTime: post?.date,
-      authors: ["dltmdrbtjd"],
+      authors: ['dltmdrbtjd'],
       tags: post?.category,
     },
     twitter: {
-      card: "summary_large_image",
+      card: 'summary_large_image',
       title: post?.title,
       description,
       images: [ogImage],
@@ -63,7 +57,7 @@ export async function generateMetadata(props: Props) {
 export async function generateStaticParams() {
   const posts = await getSortedPostsData();
   const paths = posts.map((post) => ({
-    params: { slugs: post.path.split("/") },
+    params: { slugs: post.path.split('/') },
   }));
 
   return paths;
@@ -72,9 +66,7 @@ export async function generateStaticParams() {
 export default async function PostDetailPage(props: Props) {
   const params = await props.params;
   const posts = await getSortedPostsData();
-  const fullPath = decodeURIComponent(
-    [...(params.slugs as string[])].join("/")
-  );
+  const fullPath = decodeURIComponent([...(params.slugs as string[])].join('/'));
 
   const post = posts.find((p) => p?.path === fullPath);
 
@@ -82,34 +74,34 @@ export default async function PostDetailPage(props: Props) {
     return <div>Not Found</div>;
   }
 
-  const baseUrl = "https://dltmdrbtjd.dev";
+  const baseUrl = 'https://dltmdrbtjd.dev';
   const url = `${baseUrl}/post/${fullPath}`;
   const ogImage = `${baseUrl}/images/profile.jpeg`;
 
   const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
     headline: post.title,
-    description: post.content.replaceAll("\n", "").slice(0, 150),
+    description: post.content.replaceAll('\n', '').slice(0, 150),
     image: ogImage,
     datePublished: post.date,
     dateModified: post.date,
     author: {
-      "@type": "Person",
-      name: "dltmdrbtjd",
+      '@type': 'Person',
+      name: 'dltmdrbtjd',
       url: baseUrl,
     },
     publisher: {
-      "@type": "Person",
-      name: "dltmdrbtjd",
+      '@type': 'Person',
+      name: 'dltmdrbtjd',
       url: baseUrl,
     },
-    keywords: post.category.join(", "),
+    keywords: post.category.join(', '),
     articleSection: post.category[0],
     url,
     mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": url,
+      '@type': 'WebPage',
+      '@id': url,
     },
   };
 
