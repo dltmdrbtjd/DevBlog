@@ -1,7 +1,7 @@
 import '@/src/app/styles/global.css';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
-import { GlobalLayout, Header } from '@/src/shared/ui';
+import { GlobalLayout, Header, SiteFooter } from '@/src/shared/ui';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://dltmdrbtjd.dev'),
@@ -59,7 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="ko">
-      <body>
+      <body className="min-h-screen bg-body-bg text-ink-0 antialiased">
         <script
           type="application/ld+json"
           // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD structured data for SEO
@@ -67,6 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <Header />
         <GlobalLayout>{children}</GlobalLayout>
+        <SiteFooter />
       </body>
       {process.env.NEXT_PUBLIC_STAGE === 'prod' && process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID && (
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID} />

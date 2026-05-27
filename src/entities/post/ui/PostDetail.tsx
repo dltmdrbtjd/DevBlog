@@ -1,77 +1,180 @@
-import Link from 'next/link';
-import Markdown from 'react-markdown';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { tomorrow } from 'react-syntax-highlighter/dist/cjs/styles/prism';
-import type { Post } from '../model/types';
-import { PostDate } from './PostDate';
+'use client';
 
-export function PostDetail({ post }: { post: Post }) {
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import Markdown from 'react-markdown';
+import rehypeSlug from 'rehype-slug';
+import type { Post } from '../model/types';
+import { CodeBlock } from './CodeBlock';
+import { PostDate } from './PostDate';
+import { PostSidebar } from './PostSidebar';
+import { PrevNext } from './PrevNext';
+import { ProgressRail } from './ProgressRail';
+import { ScrollProgress } from './ScrollProgress';
+import { Toc, type TocSection } from './Toc';
+
+type Props = {
+  post: Post;
+  prev?: Post;
+  next?: Post;
+};
+
+export function PostDetail({ post, prev, next }: Props) {
+  const [sections, setSections] = useState<TocSection[]>([]);
+  const [activeId, setActiveId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const headings = Array.from(
+      document.querySelectorAll<HTMLHeadingElement>('article h2[id], article h3[id]'),
+    );
+    setSections(
+      headings.map((h) => ({
+        id: h.id,
+        text: h.textContent ?? '',
+        level: Number(h.tagName.slice(1)),
+      })),
+    );
+
+    if (headings.length === 0) {
+      return;
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible.length > 0) {
+          setActiveId(visible[0].target.id);
+        }
+      },
+      { rootMargin: '-30% 0% -65% 0%', threshold: 0 },
+    );
+
+    for (const h of headings) {
+      io.observe(h);
+    }
+
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <article className="pb-20">
-      <h1 className="mb-2 text-[2rem] text-white font-bold">{post.title}</h1>
-      <div className="flex justify-between w-max mb-2">
-        {post?.category.map((t) => {
-          return (
-            <Link
-              href={`/category/${t}/pages/1`}
-              key={t}
-              className="cursor-pointer px-4 py-1 mr-2 mt-1 rounded-full bg-gray-400 font-semibold text-sm flex align-center w-max text-gray-800 no-underline"
-            >
-              {t}
-            </Link>
-          );
-        })}
-      </div>
-      <div className="text-white text-[1.25rem] my-2">
-        <PostDate dateString={post.date} />
-      </div>
-      <div className="text-white">
-        <Markdown
-          components={{
-            h1: ({ node, ...props }) => (
-              <h1 className="text-[1.75rem] font-bold text-white mt-6" {...props} />
-            ),
-            h2: ({ node, ...props }) => (
-              <h2 className="text-[1.5rem] font-bold text-white mt-6" {...props} />
-            ),
-            h3: ({ node, ...props }) => (
-              <h3 className="text-[1.25rem] font-bold text-white mt-6" {...props} />
-            ),
-            h4: ({ node, ...props }) => (
-              <h4 className="text-[1.125rem] font-bold text-white mt-6" {...props} />
-            ),
-            ul: ({ node, ...props }) => <ul className="ml-3 list-disc" {...props} />,
-            li: ({ node, ...props }) => (
-              <li className="font-light leading-7 ml-3 my-3" {...props} />
-            ),
-            ol: ({ node, ...props }) => <ol className="ml-3 list-decimal" {...props} />,
-            a: ({ node, ...props }) => (
-              <a className="text-cyan-100 hover:text-emerald-500" {...props} target="_blank" />
-            ),
-            code(props) {
-              const { children, className, node, ...rest } = props;
-              const match = /language-(\w+)/.exec(className || '');
-              return match ? (
-                <SyntaxHighlighter
-                  {...rest}
-                  PreTag="div"
-                  language={match[1]}
-                  style={tomorrow}
-                  ref={null} // Add a null ref to fix the type error
+    <>
+      <ScrollProgress />
+      <div
+        className="mx-auto grid max-w-[1120px] grid-cols-1 gap-8 px-6 pt-10 sm:px-8
+                   lg:grid-cols-[40px_1fr_220px]"
+      >
+        <ProgressRail sections={sections} activeId={activeId} />
+
+        <article className="min-w-0">
+          <Link
+            href="/post/1"
+            className="mb-4 inline-flex items-center gap-1.5 font-mono text-xs text-ink-3
+                       transition-colors hover:text-ink-0"
+          >
+            <span aria-hidden="true">←</span>
+            All posts
+          </Link>
+
+          {post.category.length > 0 && (
+            <div className="mb-3.5 flex flex-wrap gap-1.5">
+              {post.category.map((c, i) => (
+                <Link
+                  key={c}
+                  href={`/category/${c}/1`}
+                  className={i === 0 ? 'chip chip-accent' : 'chip'}
                 >
-                  {String(children).replace(/\n$/, '')}
-                </SyntaxHighlighter>
-              ) : (
-                <code {...rest} className={className}>
-                  {children}
-                </code>
-              );
-            },
-          }}
-        >
-          {post.content}
-        </Markdown>
+                  {c}
+                </Link>
+              ))}
+            </div>
+          )}
+
+          <h1 className="mb-3 text-[28px] font-bold leading-tight tracking-tight text-ink-0 sm:text-[32px]">
+            {post.title}
+          </h1>
+
+          {post.subheading && (
+            <p className="mb-3.5 text-[15px] leading-relaxed text-ink-2">{post.subheading}</p>
+          )}
+
+          <div className="mb-6 flex items-center gap-1.5 font-mono text-xs text-ink-3">
+            <span>dltmdrbtjd</span>
+            <span aria-hidden="true">·</span>
+            <PostDate dateString={post.date} />
+            <span aria-hidden="true">·</span>
+            <span>{post.readingTime} min read</span>
+          </div>
+
+          <Toc sections={sections} activeId={activeId} totalMinutes={post.readingTime} />
+
+          <div className="prose-serif">
+            <Markdown
+              rehypePlugins={[rehypeSlug]}
+              components={{
+                h1: ({ node: _node, ...props }) => (
+                  <h1
+                    className="mt-10 mb-4 text-[26px] font-bold tracking-tight text-ink-0"
+                    {...props}
+                  />
+                ),
+                h2: ({ node: _node, ...props }) => (
+                  <h2
+                    className="mt-10 mb-4 scroll-mt-24 text-[22px] font-semibold tracking-tight text-ink-0"
+                    {...props}
+                  />
+                ),
+                h3: ({ node: _node, ...props }) => (
+                  <h3
+                    className="mt-8 mb-3 scroll-mt-24 text-[18px] font-semibold tracking-tight text-ink-0"
+                    {...props}
+                  />
+                ),
+                h4: ({ node: _node, ...props }) => (
+                  <h4
+                    className="mt-6 mb-3 text-[16px] font-semibold tracking-tight text-ink-0"
+                    {...props}
+                  />
+                ),
+                p: ({ node: _node, ...props }) => <p {...props} />,
+                ul: ({ node: _node, ...props }) => (
+                  <ul className="my-4 ml-5 list-disc marker:text-ink-3" {...props} />
+                ),
+                ol: ({ node: _node, ...props }) => (
+                  <ol className="my-4 ml-5 list-decimal marker:text-ink-3" {...props} />
+                ),
+                li: ({ node: _node, ...props }) => (
+                  <li className="my-1.5 leading-[1.8] text-ink-1" {...props} />
+                ),
+                a: ({ node: _node, ...props }) => (
+                  <a
+                    className="text-accent underline decoration-accent/30 underline-offset-2 transition-colors hover:decoration-accent"
+                    target="_blank"
+                    rel="noreferrer"
+                    {...props}
+                  />
+                ),
+                blockquote: ({ node: _node, ...props }) => (
+                  <blockquote
+                    className="my-5 border-l-2 border-accent pl-4 text-ink-2 italic"
+                    {...props}
+                  />
+                ),
+                hr: () => <hr className="my-8 border-line" />,
+                pre: ({ children }) => <>{children}</>,
+                code: CodeBlock,
+              }}
+            >
+              {post.content}
+            </Markdown>
+          </div>
+
+          <PrevNext prev={prev} next={next} />
+        </article>
+
+        <PostSidebar post={post} />
       </div>
-    </article>
+    </>
   );
 }

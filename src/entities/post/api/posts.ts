@@ -3,6 +3,7 @@ import path from 'node:path';
 import { globSync } from 'glob';
 import matter from 'gray-matter';
 import { cache } from 'react';
+import { calcReadingMinutes } from '../lib/reading-time';
 import type { Post } from '../model/types';
 
 const postsDirectory = path.join(process.cwd(), 'src/entities/post/model/constants/posts');
@@ -30,6 +31,10 @@ export const getSortedPostsData = cache(async (): Promise<Post[]> => {
           content,
           date,
           path,
+          readingTime: calcReadingMinutes(content),
+          featured: data.featured ?? false,
+          cover: data.cover,
+          updated: data.updated,
         };
         prev.push(result);
       }

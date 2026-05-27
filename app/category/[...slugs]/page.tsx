@@ -13,7 +13,7 @@ export async function generateMetadata(props: Props) {
   const { slugs } = params;
   const category = decodeURIComponent(slugs[0]);
   const id = slugs[1];
-  const pageNum = Number.parseInt(id);
+  const pageNum = Number.parseInt(id, 10);
 
   const postsWithCategory = posts.filter((post) => post.category.find((t) => t === category));
 
@@ -42,16 +42,13 @@ export async function generateStaticParams() {
   const posts = await getSortedPostsData();
   const categories = await getAllCategory();
 
-  const paths = categories.flatMap(({ category }) => {
+  return categories.flatMap(({ category }) => {
     const categoryPosts = posts.filter((post) => post.category.find((t) => t === category));
-    const categoryCnt = categoryPosts.length;
-
-    return [...new Array(Math.round(categoryCnt / DefaultNumberOfPosts)).keys()].map((i) => ({
+    const totalPages = Math.max(1, Math.ceil(categoryPosts.length / DefaultNumberOfPosts));
+    return Array.from({ length: totalPages }, (_, i) => ({
       params: { category, id: `${i + 1}` },
     }));
   });
-
-  return paths;
 }
 
 export default async function Category(props: Props) {
@@ -60,25 +57,39 @@ export default async function Category(props: Props) {
   const { slugs } = params;
   const category = decodeURIComponent(slugs[0]);
   const id = slugs[1];
-  const pageNum = Number.parseInt(id);
-
-  const startIdx = (pageNum - 1) * DefaultNumberOfPosts;
-  const lastIdx = startIdx + DefaultNumberOfPosts;
+  const pageNum = Number.parseInt(id, 10);
 
   const postsWithCategory = posts.filter((post) => post.category.find((t) => t === category));
 
-  const post = postsWithCategory.slice(startIdx, lastIdx);
-  const isNextPage = postsWithCategory.length / DefaultNumberOfPosts > pageNum;
+  const startIdx = (pageNum - 1) * DefaultNumberOfPosts;
+  const lastIdx = startIdx + DefaultNumberOfPosts;
+  const slicedPosts = postsWithCategory.slice(startIdx, lastIdx);
+  const totalPages = Math.max(1, Math.ceil(postsWithCategory.length / DefaultNumberOfPosts));
+  const isNextPage = pageNum < totalPages;
 
   return (
-    <div>
-      <PostList posts={post} title={category} />
+    <PostList
+      posts={slicedPosts}
+      listLabel={`${category} · ${postsWithCategory.length} posts`}
+      greeting={
+        <>
+          <div className="kicker">category</div>
+          <h1 className="mt-3 text-[36px] font-bold leading-[1.15] tracking-tight">
+            {category}
+            <span className="text-accent">.</span>
+          </h1>
+          <p className="mt-2 max-w-[520px] text-sm leading-relaxed text-ink-2">
+            {category} 주제로 정리한 글 모음입니다.
+          </p>
+        </>
+      }
+    >
       <Pagination
         isNextPage={isNextPage}
         pageNum={pageNum}
         prevPath={`/category/${category}/${pageNum - 1}`}
         nextPath={`/category/${category}/${pageNum + 1}`}
       />
-    </div>
+    </PostList>
   );
 }

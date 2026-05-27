@@ -1,4 +1,5 @@
-import { getSortedPostsData, PostBackButton, PostDetail } from '@/src/entities/post';
+import { notFound } from 'next/navigation';
+import { getSortedPostsData, PostDetail } from '@/src/entities/post';
 
 interface Props {
   params: Promise<{
@@ -41,7 +42,7 @@ export async function generateMetadata(props: Props) {
         },
       ],
       publishedTime: post?.date,
-      modifiedTime: post?.date,
+      modifiedTime: post?.updated ?? post?.date,
       authors: ['dltmdrbtjd'],
       tags: post?.category,
     },
@@ -56,11 +57,9 @@ export async function generateMetadata(props: Props) {
 
 export async function generateStaticParams() {
   const posts = await getSortedPostsData();
-  const paths = posts.map((post) => ({
+  return posts.map((post) => ({
     params: { slugs: post.path.split('/') },
   }));
-
-  return paths;
 }
 
 export default async function PostDetailPage(props: Props) {
@@ -68,11 +67,16 @@ export default async function PostDetailPage(props: Props) {
   const posts = await getSortedPostsData();
   const fullPath = decodeURIComponent([...(params.slugs as string[])].join('/'));
 
-  const post = posts.find((p) => p?.path === fullPath);
+  const idx = posts.findIndex((p) => p?.path === fullPath);
+  const post = idx >= 0 ? posts[idx] : undefined;
 
   if (!post) {
-    return <div>Not Found</div>;
+    notFound();
   }
+
+  // posts is sorted by date desc → older posts come at idx + 1, newer at idx - 1
+  const prev = posts[idx + 1];
+  const next = posts[idx - 1];
 
   const baseUrl = 'https://dltmdrbtjd.dev';
   const url = `${baseUrl}/post/${fullPath}`;
@@ -85,7 +89,7 @@ export default async function PostDetailPage(props: Props) {
     description: post.content.replaceAll('\n', '').slice(0, 150),
     image: ogImage,
     datePublished: post.date,
-    dateModified: post.date,
+    dateModified: post.updated ?? post.date,
     author: {
       '@type': 'Person',
       name: 'dltmdrbtjd',
@@ -106,14 +110,13 @@ export default async function PostDetailPage(props: Props) {
   };
 
   return (
-    <div>
+    <>
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD structured data for SEO
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <PostBackButton />
-      <PostDetail post={post} />
-    </div>
+      <PostDetail post={post} prev={prev} next={next} />
+    </>
   );
 }

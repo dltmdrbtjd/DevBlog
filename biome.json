@@ -9,7 +9,9 @@
       "!**/node_modules",
       "!**/dist",
       "!**/build",
-      "!**/.contentlayer"
+      "!**/.contentlayer",
+      "!design_handoff_devblog_redesign",
+      "!**/*.css"
     ]
   },
   "formatter": {
