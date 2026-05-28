@@ -47,22 +47,28 @@ export function Toc({ sections, activeId, totalMinutes }: Props) {
 
       {open && (
         <ol className="mt-3.5 m-0 grid list-none grid-cols-1 gap-x-6 gap-y-1.5 p-0 sm:grid-cols-2">
-          {sections.map((s, i) => (
-            <li key={s.id}>
-              <a
-                href={`#${s.id}`}
-                className={`flex gap-2 text-[13px] transition-colors ${
-                  s.id === activeId ? 'text-ink-0' : 'text-ink-2 hover:text-ink-0'
-                }`}
-                style={s.level >= 3 ? { paddingLeft: 12 } : undefined}
-              >
-                <span className="w-[18px] shrink-0 font-mono text-[11px] text-ink-4">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <span className="truncate">{s.text}</span>
-              </a>
-            </li>
-          ))}
+          {sections.map((s, i) => {
+            const isActive = s.id === activeId;
+            return (
+              <li key={s.id}>
+                <a
+                  href={`#${s.id}`}
+                  className={`flex gap-2 text-[13px] transition-colors ${
+                    isActive ? 'text-ink-0' : 'text-ink-2 hover:text-ink-0'
+                  }`}
+                >
+                  <span
+                    className={`w-[18px] shrink-0 font-mono text-[11px] transition-colors ${
+                      isActive ? 'text-accent' : 'text-ink-4'
+                    }`}
+                  >
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span className="truncate">{s.text}</span>
+                </a>
+              </li>
+            );
+          })}
         </ol>
       )}
     </nav>

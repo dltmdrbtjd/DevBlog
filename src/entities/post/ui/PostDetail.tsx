@@ -9,7 +9,6 @@ import { CodeBlock } from './CodeBlock';
 import { PostDate } from './PostDate';
 import { PostSidebar } from './PostSidebar';
 import { PrevNext } from './PrevNext';
-import { ProgressRail } from './ProgressRail';
 import { ScrollProgress } from './ScrollProgress';
 import { Toc, type TocSection } from './Toc';
 
@@ -39,23 +38,34 @@ export function PostDetail({ post, prev, next }: Props) {
       return;
     }
 
-    const io = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-        if (visible.length > 0) {
-          setActiveId(visible[0].target.id);
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const activeLine = 120;
+      let current = headings[0].id;
+      for (const h of headings) {
+        if (h.getBoundingClientRect().top > activeLine) {
+          break;
         }
-      },
-      { rootMargin: '-30% 0% -65% 0%', threshold: 0 },
-    );
+        current = h.id;
+      }
+      setActiveId(current);
+    };
 
-    for (const h of headings) {
-      io.observe(h);
-    }
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
 
-    return () => io.disconnect();
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
   }, []);
 
   return (
@@ -63,10 +73,8 @@ export function PostDetail({ post, prev, next }: Props) {
       <ScrollProgress />
       <div
         className="mx-auto grid max-w-[1120px] grid-cols-1 gap-8 px-6 pt-10 sm:px-8
-                   lg:grid-cols-[40px_1fr_220px]"
+                   lg:grid-cols-[1fr_220px]"
       >
-        <ProgressRail sections={sections} activeId={activeId} />
-
         <article className="min-w-0">
           <Link
             href="/post/1"
