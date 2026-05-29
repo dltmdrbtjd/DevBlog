@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { calcStats, getSortedPostsData, PostList } from '@/src/entities/post';
 import { DefaultNumberOfPosts } from '@/src/shared/model';
 
@@ -25,6 +26,18 @@ export default async function Home() {
           </p>
         </>
       }
-    />
+    >
+      <div className="mt-8 flex justify-center border-t border-line pt-6">
+        <Link
+          href="/post"
+          className="inline-flex items-center gap-2 rounded-md border border-line px-4 py-2
+                     font-mono text-xs text-ink-2 transition-colors
+                     hover:border-line-strong hover:text-ink-0"
+        >
+          전체 글 보기
+          <span aria-hidden="true">→</span>
+        </Link>
+      </div>
+    </PostList>
   );
 }

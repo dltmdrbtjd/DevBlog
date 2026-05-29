@@ -55,9 +55,10 @@ export function PostList({
           <li
             key={p.path}
             className="grid grid-cols-1 items-start gap-x-6 gap-y-2 border-b border-line py-5
-                       sm:grid-cols-[90px_1fr_auto]"
+                       sm:grid-cols-[90px_128px_1fr_auto]"
           >
             <PostDate dateString={p.date} className="font-mono text-xs text-ink-3 sm:pt-1" />
+            <PostCoverThumb post={p} />
             <div className="min-w-0">
               <Link
                 href={`/post/${p.path}`}
@@ -86,6 +87,33 @@ export function PostList({
 
       {children}
     </div>
+  );
+}
+
+function PostCoverThumb({ post }: { post: Post }) {
+  return (
+    <Link
+      href={`/post/${post.path}`}
+      aria-label={post.title}
+      className="relative aspect-[16/9] w-full overflow-hidden rounded-md bg-bg-2 sm:w-32"
+    >
+      {post.cover ? (
+        <Image
+          src={post.cover}
+          alt=""
+          fill
+          sizes="(min-width: 640px) 128px, calc(100vw - 48px)"
+          className="object-cover transition-transform duration-300 hover:scale-[1.03]"
+        />
+      ) : (
+        <span
+          className="flex h-full items-center justify-center border border-dashed border-line-strong
+                     font-mono text-[10px] text-ink-4"
+        >
+          cover
+        </span>
+      )}
+    </Link>
   );
 }
 
@@ -142,7 +170,13 @@ function FeaturedCard({ post }: { post: Post }) {
 
       {post.cover ? (
         <div className="relative h-full min-h-[200px] overflow-hidden rounded-md">
-          <Image src={post.cover} alt="" fill className="object-cover" />
+          <Image
+            src={post.cover}
+            alt=""
+            fill
+            sizes="(min-width: 768px) 360px, calc(100vw - 48px)"
+            className="object-cover"
+          />
         </div>
       ) : (
         <div

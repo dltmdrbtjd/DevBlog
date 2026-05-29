@@ -1,5 +1,6 @@
-import { notFound } from 'next/navigation';
-import { getSortedPostsData, PostDetail } from '@/src/entities/post';
+import { notFound, redirect } from 'next/navigation';
+import { ArticleList, getSortedPostsData, PostDetail } from '@/src/entities/post';
+import { DefaultNumberOfPosts } from '@/src/shared/model';
 
 interface Props {
   params: Promise<{
@@ -9,6 +10,12 @@ interface Props {
 
 export async function generateMetadata(props: Props) {
   const params = await props.params;
+
+  // 단일 숫자 세그먼트는 글 목록 페이지네이션 (/post/2 ...)
+  if (params.slugs.length === 1 && /^\d+$/.test(params.slugs[0])) {
+    return { title: 'Posts', description: '전체 글 목록' };
+  }
+
   const posts = await getSortedPostsData();
   const fullPath = decodeURIComponent([...(params.slugs as string[])].join('/'));
 
@@ -16,7 +23,7 @@ export async function generateMetadata(props: Props) {
   const baseUrl = 'https://dltmdrbtjd.dev';
   const url = `${baseUrl}/post/${fullPath}`;
   const description = post?.content.replaceAll('\n', '').slice(0, 150) || '';
-  const ogImage = `${baseUrl}/images/profile.jpeg`;
+  const ogImage = post?.cover ? `${baseUrl}${post.cover}` : `${baseUrl}/images/profile.jpeg`;
 
   return {
     title: post?.title,
@@ -57,13 +64,31 @@ export async function generateMetadata(props: Props) {
 
 export async function generateStaticParams() {
   const posts = await getSortedPostsData();
-  return posts.map((post) => ({
-    params: { slugs: post.path.split('/') },
+  const totalPages = Math.max(1, Math.ceil(posts.length / DefaultNumberOfPosts));
+
+  const detailParams = posts.map((post) => ({
+    slugs: post.path.split('/'),
   }));
+  // 2페이지부터 페이지네이션 경로도 정적 생성 (1페이지는 /post 가 담당)
+  const pageParams = Array.from({ length: Math.max(0, totalPages - 1) }, (_, i) => ({
+    slugs: [`${i + 2}`],
+  }));
+
+  return [...detailParams, ...pageParams];
 }
 
 export default async function PostDetailPage(props: Props) {
   const params = await props.params;
+
+  // 단일 숫자 세그먼트(/post/2, /post/3 ...)는 글 목록 페이지네이션으로 처리
+  if (params.slugs.length === 1 && /^\d+$/.test(params.slugs[0])) {
+    const pageNum = Number.parseInt(params.slugs[0], 10);
+    if (pageNum === 1) {
+      redirect('/post');
+    }
+    return <ArticleList pageNum={pageNum} />;
+  }
+
   const posts = await getSortedPostsData();
   const fullPath = decodeURIComponent([...(params.slugs as string[])].join('/'));
 
@@ -80,7 +105,7 @@ export default async function PostDetailPage(props: Props) {
 
   const baseUrl = 'https://dltmdrbtjd.dev';
   const url = `${baseUrl}/post/${fullPath}`;
-  const ogImage = `${baseUrl}/images/profile.jpeg`;
+  const ogImage = post.cover ? `${baseUrl}${post.cover}` : `${baseUrl}/images/profile.jpeg`;
 
   const jsonLd = {
     '@context': 'https://schema.org',

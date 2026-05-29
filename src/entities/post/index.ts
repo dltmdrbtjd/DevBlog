@@ -2,6 +2,7 @@ export { getAllCategory, getSortedPostsData } from './api/posts';
 export { calcReadingMinutes } from './lib/reading-time';
 export { calcStats } from './lib/stats';
 export type { Post } from './model/types';
+export { ArticleList } from './ui/ArticleList';
 export { Pagination } from './ui/Pagination';
 export { PostDate } from './ui/PostDate';
 export { PostDetail } from './ui/PostDetail';

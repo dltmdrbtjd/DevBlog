@@ -7,8 +7,13 @@ import { usePathname } from 'next/navigation';
 const NAV = [
   {
     href: '/',
+    label: 'Home',
+    match: (p: string) => p === '/',
+  },
+  {
+    href: '/post',
     label: 'Posts',
-    match: (p: string) => p === '/' || p.startsWith('/post'),
+    match: (p: string) => p.startsWith('/post'),
   },
   {
     href: '/category',
