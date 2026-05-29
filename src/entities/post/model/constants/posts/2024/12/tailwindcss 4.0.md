@@ -2,6 +2,7 @@
 title: 'tailwindcss 4.0 톺아보기'
 date: '2024-12-01'
 subheading: 'tailwindcss 4.0 에 대한 톺아보기'
+cover: '/images/posts/2024/12/tailwindcss-4.png'
 completed: true
 category:
   - tailwindcss

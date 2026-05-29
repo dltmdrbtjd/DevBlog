@@ -2,6 +2,7 @@
 title: 'Vercel Usage의 함정'
 date: '2024-07-07'
 subheading: 'Vercel 사용시 주의할 점에 대한 경험담'
+cover: '/images/posts/2024/07/vercel-usage-pitfall.png'
 completed: true
 category:
   - Vercel

@@ -2,6 +2,7 @@
 title: 'Vercel Usage 사용량 문제 해결'
 date: '2024-10-01'
 subheading: 'CloudFront 요청으로 인한 Vercel 사용량이 과도하게 증가했던 문제에 대한 해결 과정'
+cover: '/images/posts/2024/10/vercel-usage-solution.png'
 completed: true
 category:
   - Vercel
