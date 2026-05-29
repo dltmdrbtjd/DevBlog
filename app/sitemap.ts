@@ -44,7 +44,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const postPaginationPages: MetadataRoute.Sitemap = Array.from(
     { length: totalPostPages },
     (_, i) => ({
-      url: `${baseUrl}/post/${i + 1}`,
+      url: i === 0 ? `${baseUrl}/post` : `${baseUrl}/post/${i + 1}`,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
       priority: 0.6,

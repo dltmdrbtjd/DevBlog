@@ -6,4 +6,8 @@ export interface Post {
   category: string[];
   path: string;
   content: string;
+  readingTime: number;
+  featured?: boolean;
+  cover?: string;
+  updated?: string;
 }

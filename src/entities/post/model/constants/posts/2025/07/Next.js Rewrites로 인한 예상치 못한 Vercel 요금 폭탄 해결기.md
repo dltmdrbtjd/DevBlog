@@ -2,6 +2,7 @@
 title: 'Next.js Rewrites로 인한 예상치 못한 Vercel 요금 폭탄 해결기'
 date: '2025-07-28'
 subheading: 'Vercel 비용을 줄인 과정에서 얻은것들'
+cover: '/images/posts/2025/07/nextjs-rewrites-vercel-billing.png'
 completed: true
 category:
   - Vercel

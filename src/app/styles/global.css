@@ -1,15 +1,295 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 @import "tailwindcss";
 
-body,
-html {
-  background-color: rgb(30 41 59); /* slate-800 */
+/* ------------------------------------------------------------------
+ * Design tokens — Slate + Sage Green (devlog redesign)
+ * ------------------------------------------------------------------ */
+:root {
+  --bg-0: #10141a;
+  --bg-1: #161b22;
+  --bg-2: #1c2230;
+  --bg-3: #232a3a;
+  --body-bg: #0a0d12;
+
+  --line: #2a3242;
+  --line-soft: #1f2632;
+  --line-strong: #3a4256;
+
+  --ink-0: #f1f4f8;
+  --ink-1: #d6dbe2;
+  --ink-2: #a3aab5;
+  --ink-3: #737a86;
+  --ink-4: #535864;
+
+  --accent: oklch(0.72 0.13 155);
+  --accent-soft: oklch(0.72 0.13 155 / 0.16);
+  --accent-line: oklch(0.72 0.13 155 / 0.42);
+
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 16px;
+
+  --font-ui: "Manrope", "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: var(--font-body);
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* ------------------------------------------------------------------
+ * Tailwind v4 theme — registers tokens for bg-bg-1, text-ink-0, etc.
+ * ------------------------------------------------------------------ */
+@theme inline {
+  --color-bg-0: var(--bg-0);
+  --color-bg-1: var(--bg-1);
+  --color-bg-2: var(--bg-2);
+  --color-bg-3: var(--bg-3);
+  --color-body-bg: var(--body-bg);
+
+  --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
+  --color-line-strong: var(--line-strong);
+
+  --color-ink-0: var(--ink-0);
+  --color-ink-1: var(--ink-1);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-ink-4: var(--ink-4);
+
+  --color-accent: var(--accent);
+
+  --font-sans: var(--font-ui);
+  --font-serif: var(--font-serif);
+  --font-mono: var(--font-mono);
+
+  --radius-sm: var(--r-sm);
+  --radius-md: var(--r-md);
+  --radius-lg: var(--r-lg);
+}
+
+html,
+body {
+  background-color: var(--body-bg);
+  color: var(--ink-0);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.tnum,
+.stats * {
+  font-feature-settings: "tnum" 1;
 }
 
 li::marker {
-  color: white !important;
-  font-weight: bold !important;
+  color: var(--ink-3);
+  font-weight: 400 !important;
 }
 
 a {
   outline: none;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ------------------------------------------------------------------
+ * Reusable primitives
+ * ------------------------------------------------------------------ */
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-3);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.kicker::before {
+  content: "";
+  width: 14px;
+  height: 1px;
+  background: var(--ink-4);
+}
+.kicker-bare::before {
+  display: none;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 11px;
+  color: var(--ink-2);
+  background: var(--bg-1);
+  white-space: nowrap;
+}
+.chip-accent {
+  color: var(--accent);
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+}
+.chip-solid {
+  background: var(--bg-2);
+  color: var(--ink-1);
+  border-color: var(--line);
+}
+
+.card {
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 20px;
+}
+.card-featured {
+  background:
+    radial-gradient(
+      120% 80% at 100% 0%,
+      color-mix(in oklab, var(--accent) 8%, transparent) 0%,
+      transparent 60%
+    ),
+    var(--bg-1);
+  border: 1px solid var(--line);
+}
+
+.progress-top {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: var(--line-soft);
+  z-index: 50;
+}
+.progress-top > .fill {
+  height: 100%;
+  background: var(--accent);
+  transform-origin: left;
+  transform: scaleX(0);
+  will-change: transform;
+}
+
+.codeblock {
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: #0a0c11;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  overflow: hidden;
+  margin: 20px 0;
+}
+.codeblock-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-2);
+  color: var(--ink-3);
+  font-size: 11px;
+}
+.codeblock-head .file {
+  color: var(--ink-2);
+}
+.codeblock-head .lang {
+  padding: 1px 7px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink-3);
+  font-size: 10px;
+}
+.codeblock-copy {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink-3);
+  padding: 3px 9px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
+}
+.codeblock-copy:hover {
+  color: var(--ink-0);
+  border-color: var(--ink-3);
+}
+.codeblock pre {
+  margin: 0;
+  padding: 14px;
+  color: var(--ink-1);
+  overflow: auto;
+}
+
+/* Timeline rail (About) */
+.tl-rail {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--line);
+}
+.tl-rail::before,
+.tl-rail::after {
+  content: "";
+  position: absolute;
+  left: -3px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ink-3);
+}
+.tl-rail::before {
+  top: 0;
+}
+.tl-rail::after {
+  bottom: 0;
+}
+
+.tl-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--bg-0);
+  border: 2px solid var(--accent);
+}
+.tl-dot-muted {
+  border-color: var(--ink-4);
+}
+
+/* Body for long-form reading */
+.prose-serif p {
+  font-family: var(--font-body);
+  font-size: 16.5px;
+  line-height: 1.85;
+  letter-spacing: -0.003em;
+  color: var(--ink-1);
+  margin: 0 0 18px;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.prose-serif p em {
+  font-style: italic;
+  color: var(--ink-0);
+}
+
+.card,
+.codeblock,
+.chip,
+.tl-dot {
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.15s ease;
 }

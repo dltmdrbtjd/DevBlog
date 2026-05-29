@@ -2,6 +2,7 @@
 title: 'CRA사용을 멈춰라'
 date: '2022-10-24'
 subheading: 'CRA사용을 멈춰야 한다는것에 대한 내용을 개인적으로 알아보기 쉽게 정리'
+cover: '/images/posts/2022/10/stop-using-cra.png'
 completed: true
 category:
   - React

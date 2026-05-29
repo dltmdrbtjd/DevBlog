@@ -2,6 +2,7 @@
 title: 'FrontEnd 유닛테스트 어떻게 작성할까?'
 date: '2022-04-14'
 subheading: '주니어의 관점에서 FrontEnd의 테스트코드 작성에 관한 어려움'
+cover: '/images/posts/2022/04/frontend-unit-testing.png'
 completed: true
 category:
   - TestCode

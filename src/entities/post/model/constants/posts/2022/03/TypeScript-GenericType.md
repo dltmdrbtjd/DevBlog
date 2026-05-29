@@ -2,6 +2,7 @@
 title: 'TypeScript-제네릭 타입(Generic-Type)'
 date: '2022-03-06'
 subheading: '제네릭 타입(Generic-Type)에 대한 간단한 내용 및 장점 정리'
+cover: '/images/posts/2022/03/typescript-generics.png'
 completed: true
 category:
   - TypeScript
