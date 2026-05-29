@@ -1,34 +1,34 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const NAV = [
   {
-    href: '/',
-    label: 'Home',
-    match: (p: string) => p === '/',
+    href: "/",
+    label: "Home",
+    match: (p: string) => p === "/",
   },
   {
-    href: '/post',
-    label: 'Posts',
-    match: (p: string) => p.startsWith('/post'),
+    href: "/post",
+    label: "Posts",
+    match: (p: string) => p.startsWith("/post"),
   },
   {
-    href: '/category',
-    label: 'Category',
-    match: (p: string) => p.startsWith('/category'),
+    href: "/category",
+    label: "Category",
+    match: (p: string) => p.startsWith("/category"),
   },
   {
-    href: '/about',
-    label: 'About',
-    match: (p: string) => p.startsWith('/about'),
+    href: "/about",
+    label: "About",
+    match: (p: string) => p.startsWith("/about"),
   },
 ] as const;
 
 export default function Header() {
-  const pathname = usePathname() ?? '/';
+  const pathname = usePathname() ?? "/";
 
   return (
     <header className="sticky top-0 z-30 border-b border-line bg-bg-0/85 backdrop-blur-md">
@@ -39,7 +39,7 @@ export default function Header() {
         >
           <Image
             src="/images/profile.jpeg"
-            alt=""
+            alt="profile"
             width={26}
             height={26}
             className="rounded-full"
@@ -55,7 +55,7 @@ export default function Header() {
                 key={href}
                 href={href}
                 className={`transition-colors hover:text-ink-0 ${
-                  active ? 'font-medium text-ink-0' : 'text-ink-2'
+                  active ? "font-medium text-ink-0" : "text-ink-2"
                 }`}
               >
                 {label}
