@@ -9,7 +9,6 @@ import { CodeBlock } from './CodeBlock';
 import { PostDate } from './PostDate';
 import { PostSidebar } from './PostSidebar';
 import { PrevNext } from './PrevNext';
-import { ScrollProgress } from './ScrollProgress';
 import { Toc, type TocSection } from './Toc';
 
 type Props = {
@@ -20,7 +19,6 @@ type Props = {
 
 export function PostDetail({ post, prev, next }: Props) {
   const [sections, setSections] = useState<TocSection[]>([]);
-  const [activeId, setActiveId] = useState<string | null>(null);
 
   useEffect(() => {
     const headings = Array.from(
@@ -33,44 +31,10 @@ export function PostDetail({ post, prev, next }: Props) {
         level: Number(h.tagName.slice(1)),
       })),
     );
-
-    if (headings.length === 0) {
-      return;
-    }
-
-    let ticking = false;
-    const update = () => {
-      ticking = false;
-      const activeLine = 120;
-      let current = headings[0].id;
-      for (const h of headings) {
-        if (h.getBoundingClientRect().top > activeLine) {
-          break;
-        }
-        current = h.id;
-      }
-      setActiveId(current);
-    };
-
-    const onScroll = () => {
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(update);
-      }
-    };
-
-    update();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-    };
   }, []);
 
   return (
     <>
-      <ScrollProgress />
       <div
         className="mx-auto grid max-w-[1120px] grid-cols-1 gap-8 px-6 pt-10 sm:px-8
                    lg:grid-cols-[1fr_220px]"
@@ -115,7 +79,7 @@ export function PostDetail({ post, prev, next }: Props) {
             <span>{post.readingTime} min read</span>
           </div>
 
-          <Toc sections={sections} activeId={activeId} totalMinutes={post.readingTime} />
+          <Toc sections={sections} totalMinutes={post.readingTime} />
 
           <div className="prose-serif">
             <Markdown

@@ -1,2 +1,2 @@
-export type { Career, SkillGroup } from './model/career';
+export type { Career } from './model/career';
 export { CAREER, SKILLS } from './model/career';

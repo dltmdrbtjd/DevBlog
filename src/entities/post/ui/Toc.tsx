@@ -10,11 +10,10 @@ export type TocSection = {
 
 type Props = {
   sections: TocSection[];
-  activeId: string | null;
   totalMinutes: number;
 };
 
-export function Toc({ sections, activeId, totalMinutes }: Props) {
+export function Toc({ sections, totalMinutes }: Props) {
   const [open, setOpen] = useState(true);
 
   if (sections.length === 0) {
@@ -47,28 +46,19 @@ export function Toc({ sections, activeId, totalMinutes }: Props) {
 
       {open && (
         <ol className="mt-3.5 m-0 grid list-none grid-cols-1 gap-x-6 gap-y-1.5 p-0 sm:grid-cols-2">
-          {sections.map((s, i) => {
-            const isActive = s.id === activeId;
-            return (
-              <li key={s.id}>
-                <a
-                  href={`#${s.id}`}
-                  className={`flex gap-2 text-[13px] transition-colors ${
-                    isActive ? 'text-ink-0' : 'text-ink-2 hover:text-ink-0'
-                  }`}
-                >
-                  <span
-                    className={`w-[18px] shrink-0 font-mono text-[11px] transition-colors ${
-                      isActive ? 'text-accent' : 'text-ink-4'
-                    }`}
-                  >
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <span className="truncate">{s.text}</span>
-                </a>
-              </li>
-            );
-          })}
+          {sections.map((s, i) => (
+            <li key={s.id}>
+              <a
+                href={`#${s.id}`}
+                className="flex gap-2 text-[13px] text-ink-2 transition-colors hover:text-ink-0"
+              >
+                <span className="w-[18px] shrink-0 font-mono text-[11px] text-accent">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span className="truncate">{s.text}</span>
+              </a>
+            </li>
+          ))}
         </ol>
       )}
     </nav>
