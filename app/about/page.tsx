@@ -1,10 +1,10 @@
-import type { Metadata } from 'next';
-import Image from 'next/image';
-import { CAREER, SKILLS } from '@/src/entities/about';
+import type { Metadata } from "next";
+import Image from "next/image";
+import { CAREER, SKILLS } from "@/src/entities/about";
 
 export const metadata: Metadata = {
-  title: 'About',
-  description: 'Lee Seung Gyu · Frontend Engineer · Seoul',
+  title: "About",
+  description: "Lee Seung Gyu · Frontend Engineer · Seoul",
 };
 
 export default function AboutPage() {
@@ -33,11 +33,13 @@ function ProfileRail() {
           <div
             className="pointer-events-none absolute inset-0 rounded-full"
             style={{
-              boxShadow: '0 0 0 6px var(--body-bg), 0 0 0 7px var(--line)',
+              boxShadow: "0 0 0 6px var(--body-bg), 0 0 0 7px var(--line)",
             }}
           />
         </div>
-        <div className="text-xl font-semibold tracking-tight">Lee Seung Gyu</div>
+        <div className="text-xl font-semibold tracking-tight">
+          Lee Seung Gyu
+        </div>
         <div className="text-[13px] text-ink-2">Frontend Engineer · Seoul</div>
         <a
           href="mailto:dltmdrbtjd@gmail.com"
@@ -68,15 +70,16 @@ function ProfileRail() {
       <div>
         <div className="kicker mb-2">Now</div>
         <p className="text-[13px] leading-[1.6] text-ink-1">
-          금융 콘텐츠 플랫폼의 프론트엔드를 만들고 있어요. 디자인 시스템 확장과 모노레포 운영이 요즘
-          화두입니다.
+          현재 금융 콘텐츠 플랫폼을 만들고 있습니다. 최근에는 AI를 통하여 유저가
+          서비스를 더 가치있게 느낄수있도록 만드는 작업들에 관심을 많이 가지고
+          진행하고 있습니다.
         </p>
       </div>
 
       <div>
         <div className="kicker mb-2">Interests</div>
         <div className="flex flex-wrap gap-1.5">
-          {['Design System', 'UI/UX', 'DX', 'A11y', 'Performance', 'Observability'].map((t) => (
+          {["AI", "DX", "Performance", "Observability"].map((t) => (
             <span key={t} className="chip">
               {t}
             </span>
@@ -95,24 +98,42 @@ function Main() {
         함께 고민하며 만드는 <span className="text-accent">사람</span>.
       </h1>
       <p className="mb-10 max-w-[640px] text-[15px] leading-[1.75] text-ink-2">
-        TypeScript와 React 생태계 안에서 프로덕트를 만들어 왔습니다. 더 나은 UI/UX, 디자인 시스템,
-        그리고 코드가 만들어내는 비즈니스 임팩트에 관심이 많습니다.
+        TypeScript와 React 생태계 안에서 프로덕트를 만들어 왔습니다. 콘텐츠 기반
+        서비스를 설계·운영하며 조직의 기술 표준과 공통 라이브러리 구축을 통해
+        개발 생산성 향상에 기여했습니다. 코드가 만들어내는 비즈니스 임팩트에
+        관심이 많습니다. 최근에는 AI를 통하여 생산성을 향상시키는것과 더불어
+        유저가 서비스를 더 가치있게 사용할 수 있도록 하게끔 하는것에 관심이
+        많습니다.
       </p>
-
+      <section className="mt-10 border-t border-line py-6">
+        <div className="kicker mb-4">Key Expertise</div>
+        <dl className="m-0 flex flex-row gap-3 p-0">
+          {SKILLS.map((s) => (
+            <dd className="m-0 flex flex-wrap gap-1.5">
+              <span key={s} className="chip">
+                {s}
+              </span>
+            </dd>
+          ))}
+        </dl>
+      </section>
       <div className="mb-5 flex items-baseline justify-between">
         <div className="kicker">career</div>
         <span className="font-mono text-xs text-ink-3">2021 — now · 4y+</span>
       </div>
-
       <div className="relative pl-7">
         <div className="tl-rail" style={{ left: 5 }} />
 
         {CAREER.map((c) => (
           <article key={c.company} className="relative mb-10 last:mb-0">
-            <span className={`tl-dot absolute top-1 -left-7 ${c.current ? '' : 'tl-dot-muted'}`} />
+            <span
+              className={`tl-dot absolute top-0 -left-7 ${c.current ? "" : "tl-dot-muted"}`}
+            />
 
             <header className="mb-1 flex flex-wrap items-baseline gap-2.5">
-              <h2 className="text-lg font-semibold tracking-tight">{c.company}</h2>
+              <h2 className="text-lg font-semibold tracking-tight">
+                {c.company}
+              </h2>
               <span className="text-xs text-ink-3">{c.role}</span>
               <span className="ml-auto font-mono text-[11px] text-ink-3">
                 {c.period}
@@ -134,7 +155,7 @@ function Main() {
               {c.bullets.map((b, i) => (
                 <li key={b} className="mb-1 flex gap-2.5">
                   <span className="shrink-0 pt-1 font-mono text-[11px] text-accent">
-                    {String(i + 1).padStart(2, '0')}
+                    {String(i + 1).padStart(2, "0")}
                   </span>
                   <span>{b}</span>
                 </li>
@@ -143,28 +164,6 @@ function Main() {
           </article>
         ))}
       </div>
-
-      <section className="mt-10 border-t border-line pt-7">
-        <div className="kicker mb-4">toolbox</div>
-        <dl className="m-0 flex flex-col gap-3 p-0">
-          {SKILLS.map((s) => (
-            <div
-              key={s.k}
-              className="grid grid-cols-1 items-start gap-3 border-b border-dashed border-line
-                         pb-3 last:border-b-0 sm:grid-cols-[110px_1fr]"
-            >
-              <dt className="kicker pt-1">{s.k}</dt>
-              <dd className="m-0 flex flex-wrap gap-1.5">
-                {s.v.map((v) => (
-                  <span key={v} className="chip">
-                    {v}
-                  </span>
-                ))}
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </section>
     </div>
   );
 }
